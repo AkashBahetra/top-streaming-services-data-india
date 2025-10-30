@@ -537,7 +537,7 @@ def get_list_items(list_id: str, client_id: str = None, access_token: str = None
         client_id: The Trakt.tv client ID for the appropriate account
         access_token: The access token for the appropriate account
     """
-    looging.info(f"Getting items from list ID: {list_id}")
+    logging.info(f"Getting items from list ID: {list_id}")
     response = requests.get(
         f"https://api.trakt.tv/users/me/lists/{list_id}/items",
         headers=get_headers(client_id, access_token),

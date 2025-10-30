@@ -44,7 +44,7 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.NETFLIX_REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.NETFLIX_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.NETFLIX_CLIENT_SECRET }}
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           response=$(curl -s --location 'https://api.trakt.tv/oauth/token' \
             --header 'Content-Type: application/json' \
@@ -81,7 +81,7 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.PRIME_REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.PRIME_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.PRIME_CLIENT_SECRET }}
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           response=$(curl -s --location 'https://api.trakt.tv/oauth/token' \
             --header 'Content-Type: application/json' \
@@ -118,7 +118,7 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.OTHERS_REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.OTHERS_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.OTHERS_CLIENT_SECRET }}
-          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           response=$(curl -s --location 'https://api.trakt.tv/oauth/token' \
             --header 'Content-Type: application/json' \

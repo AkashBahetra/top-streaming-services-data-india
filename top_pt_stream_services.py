@@ -584,12 +584,12 @@ def create_list(list_data: Dict[str, Any], client_id: str = None, access_token: 
 
 
 # Empty a list
-def empty_list(list_id: str) -> int:
+def empty_list(list_id: str, client_id: str, access_token:str) -> int:
     logging.info("Emptying list...")
     list_items = get_list_items(list_id)
     response = requests.post(
         f"https://api.trakt.tv/users/me/lists/{list_id}/items/remove",
-        headers=get_headers(),
+        headers=get_headers(client_id, access_token),
         json=list_items,
         timeout=REQUEST_TIMEOUT,
     )

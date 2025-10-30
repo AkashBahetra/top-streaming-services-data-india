@@ -136,8 +136,7 @@ trakt_zee5_top_list_data = {
 
 trakt_hotstar_top_list_data = {
     "name": "Top India Hotstar Overall",
-    "description": ("List that contains the top 10 overall content on Hotstar India "
-                   "(in Hindi) right now, updated daily"),
+    "description": "List that contains the top 10 overall content on Hotstar India (in Hindi) right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
@@ -199,7 +198,7 @@ trakt_prime_shows_list_slug = "top-India-amazon-prime-shows"
 # Get headers
 def get_headers(client_id: str = None, access_token: str = None) -> Dict[str, str]:
     """Returns headers with authorization for requests.
-    
+
     Args:
         client_id: The Trakt.tv client ID for the appropriate account
         access_token: The access token for the appropriate account
@@ -207,11 +206,9 @@ def get_headers(client_id: str = None, access_token: str = None) -> Dict[str, st
     # Default to Netflix account if no credentials provided
     client_id = client_id or NETFLIX_CLIENT_ID
     access_token = access_token or NETFLIX_ACCESS_TOKEN
+
+    user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
     
-    user_agent = (
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
-    )
     return {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {access_token}",
@@ -407,7 +404,7 @@ def retry_request(func):
 def refresh_token(
     client_id: str,
     client_secret: str,
-    refresh_token: str
+    refresh_token: str,
 ) -> Tuple[Optional[str], Optional[str]]:
     """Refresh a Trakt.tv access token.
     
@@ -446,7 +443,7 @@ def check_token(
     client_id: str = None,
     client_secret: str = None,
     access_token: str = None,
-    refresh_token: str = None
+    refresh_token: str = None,
 ) -> Union[bool, Tuple[Optional[str], Optional[str]]]:
     """Check if a Trakt.tv access token is valid and refresh if needed.
     
@@ -805,10 +802,10 @@ def create_mixed_trakt_list_payload(top_list: List[Tuple[str, str, str]]) -> Dic
 # Update a trakt list
 @retry_request
 def update_list(
-    list_slug: str, 
-    payload: Dict[str, List[Dict[str, Any]]], 
-    client_id: str = None, 
-    access_token: str = None
+    list_slug: str,
+    payload: Dict[str, List[Dict[str, Any]]],
+    client_id: str = None,
+    access_token: str = None,
 ) -> Union[requests.Response, int]:
     """Update a list in Trakt.tv with new content.
     

@@ -8,8 +8,11 @@ name: Get Top PT Stream Services
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Dev
     permissions:
       contents: write
+      actions: write
+      secrets: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -41,7 +44,7 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           response=$(curl -s --location 'https://api.trakt.tv/oauth/token' \
             --header 'Content-Type: application/json' \
@@ -62,9 +65,9 @@ jobs:
           # Save as output so the next step can access it
           echo "access_token=$access_token" >> $GITHUB_OUTPUT
 
-          # Update GitHub secrets for future runs
-          gh secret set ACCESS_TOKEN -b"$access_token"
-          gh secret set REFRESH_TOKEN -b"$refresh_token"
+          # Update GitHub environment secrets for future runs
+          gh secret set ACCESS_TOKEN -b"$access_token" --env Dev
+          gh secret set REFRESH_TOKEN -b"$refresh_token" --env Dev
 
       - name: Run Python Script
         env:

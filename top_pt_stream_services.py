@@ -497,8 +497,6 @@ def get_lists(client_id: str = None, access_token: str = None) -> List[Dict[str,
     response = requests.get(
         "https://api.trakt.tv/users/me/lists", headers=get_headers(client_id, access_token), timeout=REQUEST_TIMEOUT
     )
-    logging.info(f"Fetched {len(response.json())} lists from Trakt.tv")
-    logging.info(f"Lists: {response.json()}")
     return response.json()
 
 
@@ -588,6 +586,7 @@ def create_list(list_data: Dict[str, Any], client_id: str = None, access_token: 
 # Empty a list
 def empty_list(list_id: str, client_id: str, access_token: str) -> int:
     logging.info("Emptying list...")
+    logging.info(f"List ID: {list_id}, Client ID: {client_id}, Access Token: {access_token}")
     list_items = get_list_items(list_id)
     response = requests.post(
         f"https://api.trakt.tv/users/me/lists/{list_id}/items/remove",

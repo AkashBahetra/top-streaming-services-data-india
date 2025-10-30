@@ -95,25 +95,18 @@ trakt_netflix_shows_list_data = {
     "display_numbers": True,
 }
 
-# hotstar
+# Zee5
 trakt_zee5_top_list_data = {
-    "name": "Top India Zee5",
-    "description": "List that contains the top movies and shows on zee5 India right now, updated daily",
+    "name": "Top India Zee5 Overall",
+    "description": "List that contains the top 10 overall content on Zee5 India right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
 
-# hotstar TV
-trakt_hotstar_movies_list_data = {
-    "name": "Top India hotstar TV Movies",
-    "description": "List that contains the top 10 movies on hotstar TV India right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
-
-trakt_hotstar_shows_list_data = {
-    "name": "Top India hotstar TV Shows",
-    "description": "List that contains the top 10 TV shows on hotstar TV India right now, updated daily",
+# Hotstar
+trakt_hotstar_top_list_data = {
+    "name": "Top India Hotstar Overall",
+    "description": "List that contains the top 10 overall content on Hotstar India (in Hindi) right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
@@ -138,10 +131,9 @@ trakt_prime_shows_list_data = {
 trakt_netflix_movies_list_slug = "top-India-netflix-movies"
 trakt_netflix_shows_list_slug = "top-India-netflix-shows"
 
-trakt_zee5_list_slug = "top-India-zee5"
+trakt_zee5_list_slug = "top-India-zee5-overall"
 
-trakt_hotstar_movies_list_slug = "top-India-hotstar-tv-movies"
-trakt_hotstar_shows_list_slug = "top-India-hotstar-tv-shows"
+trakt_hotstar_list_slug = "top-India-hotstar-overall"
 
 trakt_prime_movies_list_slug = "top-India-amazon-prime-movies"
 trakt_prime_shows_list_slug = "top-India-amazon-prime-shows"
@@ -436,10 +428,8 @@ def check_lists() -> bool:
         error_create = create_list(trakt_netflix_shows_list_data)
     if trakt_zee5_list_slug not in lists_slugs:
         error_create = create_list(trakt_zee5_top_list_data)
-    if trakt_hotstar_movies_list_slug not in lists_slugs:
-        error_create = create_list(trakt_hotstar_movies_list_data)
-    if trakt_hotstar_shows_list_slug not in lists_slugs:
-        error_create = create_list(trakt_hotstar_shows_list_data)
+    if trakt_hotstar_list_slug not in lists_slugs:
+        error_create = create_list(trakt_hotstar_top_list_data)
     if trakt_prime_movies_list_slug not in lists_slugs:
         error_create = create_list(trakt_prime_movies_list_data)
     if trakt_prime_shows_list_slug not in lists_slugs:
@@ -683,8 +673,7 @@ class StreamingServiceTracker:
             ("netflix_movies", self.config.urls["netflix"], self.config.sections["movies"]),
             ("netflix_shows", self.config.urls["netflix"], self.config.sections["shows"]),
             ("zee5_overall", self.config.urls["zee5"], self.config.sections["overall"]),
-            ("hotstar_movies", self.config.urls["hotstar"], self.config.sections["movies"]),
-            ("hotstar_shows", self.config.urls["hotstar"], self.config.sections["shows"]),
+            ("hotstar_overall", self.config.urls["hotstar"], self.config.sections["overall"]),
             ("prime_movies", self.config.urls["prime"], self.config.sections["movies"]),
             ("prime_shows", self.config.urls["prime"], self.config.sections["shows"]),
         ]
@@ -743,13 +732,6 @@ class StreamingServiceTracker:
                 trakt_netflix_shows_list_slug,
             ),
             (
-                "hotstar",
-                data["hotstar_movies"],
-                data["hotstar_shows"],
-                trakt_hotstar_movies_list_slug,
-                trakt_hotstar_shows_list_slug,
-            ),
-            (
                 "prime",
                 data["prime_movies"],
                 data["prime_shows"],
@@ -766,9 +748,12 @@ class StreamingServiceTracker:
             update_list(movies_slug, movies_update)
             update_list(shows_slug, shows_update)
 
-        # Handle Disney+ list as Disney stopped showing top movies and shows separately
+        # Handle Overall lists for Zee5 and Hotstar
         zee5_update = create_mixed_trakt_list_payload(data["zee5_overall"])
         update_list(trakt_zee5_list_slug, zee5_update)
+
+        hotstar_update = create_mixed_trakt_list_payload(data["hotstar_overall"])
+        update_list(trakt_hotstar_list_slug, hotstar_update)
 
     def _report_execution_summary(self, data: Dict[str, Any]) -> None:
         """Report summary of execution including successes and failures."""

@@ -39,7 +39,7 @@ class Config:
         # URLs
         self.urls = {
             "netflix": "https://flixpatrol.com/top10/netflix/india/",
-            "disney": "https://flixpatrol.com/top10/hotstar/india/",
+            "hotstar": "https://flixpatrol.com/top10/hotstar/india/",
             "zee5": "https://flixpatrol.com/top10/zee5/india/",
             "prime": "https://flixpatrol.com/top10/amazon-prime/india/",
         }

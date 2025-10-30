@@ -150,6 +150,8 @@ jobs:
           gh secret set OTHERS_REFRESH_TOKEN --body "$refresh_token"
 
       - name: Verify All Tokens
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           echo "Verifying token updates..."
           for token in NETFLIX_ACCESS_TOKEN NETFLIX_REFRESH_TOKEN \

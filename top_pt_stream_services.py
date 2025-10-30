@@ -207,7 +207,11 @@ def get_headers(client_id: str = None, access_token: str = None) -> Dict[str, st
     client_id = client_id or NETFLIX_CLIENT_ID
     access_token = access_token or NETFLIX_ACCESS_TOKEN
 
-    user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
+    user_agent = (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/130.0.0.0 Safari/537.36"
+    )
 
     return {
         "Content-Type": "application/json",

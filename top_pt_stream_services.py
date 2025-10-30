@@ -107,7 +107,8 @@ trakt_netflix_shows_list_data = {
 # # Hotstar
 # trakt_hotstar_top_list_data = {
 #     "name": "Top India Hotstar Overall",
-#     "description": "List that contains the top 10 overall content on Hotstar India (in Hindi) right now, updated daily",
+#     "description": ("List that contains the top 10 overall content on Hotstar India "
+#                    "(in Hindi) right now, updated daily"),
 #     "privacy": "public",
 #     "display_numbers": True,
 # }

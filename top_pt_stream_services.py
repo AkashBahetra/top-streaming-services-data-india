@@ -187,8 +187,8 @@ trakt_netflix_shows_list_slug = "top-india-netflix-shows"
 
 trakt_zee5_list_slug = "top-india-zee5-overall"
 trakt_hotstar_list_slug = "top-india-hotstar-overall"
-trakt_prime_movies_list_slug = "top-india-amazon-prime-movies"
-trakt_prime_shows_list_slug = "top-india-amazon-prime-shows"
+trakt_prime_movies_list_slug = "top-india-amazon-prime-video-movies"
+trakt_prime_shows_list_slug = "top-india-amazon-prime-video-shows"
 
 # ============================
 # HELPER METHODS

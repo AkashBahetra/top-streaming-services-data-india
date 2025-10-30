@@ -8,8 +8,11 @@ name: Get Top PT Stream Services
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Dev
     permissions:
       contents: write
+      actions: write
+      secrets: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4

@@ -96,48 +96,46 @@ trakt_netflix_shows_list_data = {
     "display_numbers": True,
 }
 
-# Zee5
-trakt_zee5_top_list_data = {
-    "name": "Top India Zee5 Overall",
-    "description": "List that contains the top 10 overall content on Zee5 India right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
+# # Zee5
+# trakt_zee5_top_list_data = {
+#     "name": "Top India Zee5 Overall",
+#     "description": "List that contains the top 10 overall content on Zee5 India right now, updated daily",
+#     "privacy": "public",
+#     "display_numbers": True,
+# }
 
-# Hotstar
-trakt_hotstar_top_list_data = {
-    "name": "Top India Hotstar Overall",
-    "description": "List that contains the top 10 overall content on Hotstar India (in Hindi) right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
+# # Hotstar
+# trakt_hotstar_top_list_data = {
+#     "name": "Top India Hotstar Overall",
+#     "description": "List that contains the top 10 overall content on Hotstar India (in Hindi) right now, updated daily",
+#     "privacy": "public",
+#     "display_numbers": True,
+# }
 
-# Amazon Prime
-trakt_prime_movies_list_data = {
-    "name": "Top India Amazon Prime Movies",
-    "description": "List that contains the top 10 movies on Amazon Prime Video India right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
+# # Amazon Prime
+# trakt_prime_movies_list_data = {
+#     "name": "Top India Amazon Prime Movies",
+#     "description": "List that contains the top 10 movies on Amazon Prime Video India right now, updated daily",
+#     "privacy": "public",
+#     "display_numbers": True,
+# }
 
-trakt_prime_shows_list_data = {
-    "name": "Top India Amazon Prime Shows",
-    "description": "List that contains the top 10 TV shows on Amazon Prime Video India right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
+# trakt_prime_shows_list_data = {
+#     "name": "Top India Amazon Prime Shows",
+#     "description": "List that contains the top 10 TV shows on Amazon Prime Video India right now, updated daily",
+#     "privacy": "public",
+#     "display_numbers": True,
+# }
 
 
 # Trakt List slugs
 trakt_netflix_movies_list_slug = "top-India-netflix-movies"
 trakt_netflix_shows_list_slug = "top-India-netflix-shows"
 
-trakt_zee5_list_slug = "top-India-zee5-overall"
-
-trakt_hotstar_list_slug = "top-India-hotstar-overall"
-
-trakt_prime_movies_list_slug = "top-India-amazon-prime-movies"
-trakt_prime_shows_list_slug = "top-India-amazon-prime-shows"
+# trakt_zee5_list_slug = "top-India-zee5-overall"
+# trakt_hotstar_list_slug = "top-India-hotstar-overall"
+# trakt_prime_movies_list_slug = "top-India-amazon-prime-movies"
+# trakt_prime_shows_list_slug = "top-India-amazon-prime-shows"
 
 # ============================
 # HELPER METHODS
@@ -427,14 +425,14 @@ def check_lists() -> bool:
         error_create = create_list(trakt_netflix_movies_list_data)
     if trakt_netflix_shows_list_slug not in lists_slugs:
         error_create = create_list(trakt_netflix_shows_list_data)
-    if trakt_zee5_list_slug not in lists_slugs:
-        error_create = create_list(trakt_zee5_top_list_data)
-    if trakt_hotstar_list_slug not in lists_slugs:
-        error_create = create_list(trakt_hotstar_top_list_data)
-    if trakt_prime_movies_list_slug not in lists_slugs:
-        error_create = create_list(trakt_prime_movies_list_data)
-    if trakt_prime_shows_list_slug not in lists_slugs:
-        error_create = create_list(trakt_prime_shows_list_data)
+    # if trakt_zee5_list_slug not in lists_slugs:
+    #     error_create = create_list(trakt_zee5_top_list_data)
+    # if trakt_hotstar_list_slug not in lists_slugs:
+    #     error_create = create_list(trakt_hotstar_top_list_data)
+    # if trakt_prime_movies_list_slug not in lists_slugs:
+    #     error_create = create_list(trakt_prime_movies_list_data)
+    # if trakt_prime_shows_list_slug not in lists_slugs:
+    #     error_create = create_list(trakt_prime_shows_list_data)
     logging.debug("Lists checked!")
     return error_create
 
@@ -731,13 +729,13 @@ class StreamingServiceTracker:
                 trakt_netflix_movies_list_slug,
                 trakt_netflix_shows_list_slug,
             ),
-            (
-                "prime",
-                data["prime_movies"],
-                data["prime_shows"],
-                trakt_prime_movies_list_slug,
-                trakt_prime_shows_list_slug,
-            ),
+            # (
+            #     "prime",
+            #     data["prime_movies"],
+            #     data["prime_shows"],
+            #     trakt_prime_movies_list_slug,
+            #     trakt_prime_shows_list_slug,
+            # ),
         ]
 
         # Create and update lists for each streaming service
@@ -749,11 +747,11 @@ class StreamingServiceTracker:
             update_list(shows_slug, shows_update)
 
         # Handle Overall lists for Zee5 and Hotstar
-        zee5_update = create_mixed_trakt_list_payload(data["zee5_overall"])
-        update_list(trakt_zee5_list_slug, zee5_update)
+        # zee5_update = create_mixed_trakt_list_payload(data["zee5_overall"])
+        # update_list(trakt_zee5_list_slug, zee5_update)
 
-        hotstar_update = create_mixed_trakt_list_payload(data["hotstar_overall"])
-        update_list(trakt_hotstar_list_slug, hotstar_update)
+        # hotstar_update = create_mixed_trakt_list_payload(data["hotstar_overall"])
+        # update_list(trakt_hotstar_list_slug, hotstar_update)
 
     def _report_execution_summary(self, data: Dict[str, Any]) -> None:
         """Report summary of execution including successes and failures."""

@@ -584,7 +584,7 @@ def create_list(list_data: Dict[str, Any], client_id: str = None, access_token: 
 
 
 # Empty a list
-def empty_list(list_id: str, client_id: str, access_token:str) -> int:
+def empty_list(list_id: str, client_id: str, access_token: str) -> int:
     logging.info("Emptying list...")
     list_items = get_list_items(list_id)
     response = requests.post(

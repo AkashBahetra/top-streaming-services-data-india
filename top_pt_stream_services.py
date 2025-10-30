@@ -543,6 +543,8 @@ def get_list_items(list_id: str, client_id: str = None, access_token: str = None
         headers=get_headers(client_id, access_token),
         timeout=REQUEST_TIMEOUT,
     )
+    logging.info(f"Response status code: {response.status_code}")
+    logging.debug(f"Response content: {response.json()}")
     parsed_items = parse_items(response.json())
     logging.info(f"Retrieved {len(parsed_items['movies'])} movies and {len(parsed_items['shows'])} shows from list.")
     return parsed_items

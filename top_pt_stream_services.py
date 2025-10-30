@@ -179,8 +179,8 @@ def get_headers(client_id: str = None, access_token: str = None) -> Dict[str, st
         access_token: The access token for the appropriate account
     """
     # Default to Netflix account if no credentials provided
-    client_id = client_id
-    access_token = access_token
+    client_id = client_id or NETFLIX_CLIENT_ID
+    access_token = access_token or NETFLIX_ACCESS_TOKEN
 
     user_agent = (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "

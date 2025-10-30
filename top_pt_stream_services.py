@@ -498,6 +498,7 @@ def get_lists(client_id: str = None, access_token: str = None) -> List[Dict[str,
         "https://api.trakt.tv/users/me/lists", headers=get_headers(client_id, access_token), timeout=REQUEST_TIMEOUT
     )
     logging.info(f"Fetched {len(response.json())} lists from Trakt.tv")
+    logging.info(f"Lists: {response.json()}")
     return response.json()
 
 

@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: write
       actions: write
-      secrets: write
+      id-token: write
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -67,8 +67,8 @@ jobs:
           echo "access_token=$access_token" >> $GITHUB_OUTPUT
 
           # Update GitHub environment secrets for future runs
-          gh secret set ACCESS_TOKEN -b"$access_token" --env Dev
-          gh secret set REFRESH_TOKEN -b"$refresh_token" --env Dev
+          gh secret set ACCESS_TOKEN --body "$access_token" --env Dev
+          gh secret set REFRESH_TOKEN --body "$refresh_token" --env Dev
 
       - name: Run Python Script
         env:

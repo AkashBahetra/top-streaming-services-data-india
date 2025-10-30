@@ -1,6 +1,6 @@
 # Setup Guide
 
-This comprehensive guide will walk you through setting up the Top Streaming Services Data Portugal project from scratch.
+This comprehensive guide will walk you through setting up the Top Streaming Services Data India project from scratch.
 
 ## 📋 Prerequisites
 
@@ -23,17 +23,17 @@ This comprehensive guide will walk you through setting up the Top Streaming Serv
 
 #### Clone the Repository
 ```bash
-git clone https://github.com/pcarrasqueira/top-streaming-services-data-portugal.git
-cd top-streaming-services-data-portugal
+git clone https://github.com/pcarrasqueira/top-streaming-services-data-India.git
+cd top-streaming-services-data-India
 ```
 
 #### Fork for Personal Use (Recommended)
-1. Go to the [repository page](https://github.com/pcarrasqueira/top-streaming-services-data-portugal)
+1. Go to the [repository page](https://github.com/pcarrasqueira/top-streaming-services-data-India)
 2. Click "Fork" in the top-right corner
 3. Clone your fork:
 ```bash
-git clone https://github.com/YOUR-USERNAME/top-streaming-services-data-portugal.git
-cd top-streaming-services-data-portugal
+git clone https://github.com/YOUR-USERNAME/top-streaming-services-data-India.git
+cd top-streaming-services-data-India
 ```
 
 ### 2. Python Environment Setup
@@ -66,7 +66,7 @@ python -c "import requests, bs4, dotenv; print('All dependencies installed succe
 2. Click "New Application"
 3. Fill in the application details:
    - **Name**: `Top PT Streaming Services` (or your preferred name)
-   - **Description**: `Automated tracking of top streaming content in Portugal`
+   - **Description**: `Automated tracking of top streaming content in India`
    - **Redirect URI**: `urn:ietf:wg:oauth:2.0:oob`
    - **Website**: Your GitHub repository URL (optional)
    - **Permissions**: Check all boxes:
@@ -157,7 +157,7 @@ python top_pt_stream_services.py
 #### Expected Output
 ```
 2024-01-15 10:30:00 - INFO - Trakt access token status: True
-2024-01-15 10:30:01 - INFO - Updating list top-portugal-netflix-movies ...
+2024-01-15 10:30:01 - INFO - Updating list top-India-netflix-movies ...
 2024-01-15 10:30:02 - INFO - List updated successfully
 ... (more log entries)
 2024-01-15 10:30:15 - INFO - Finished updating lists
@@ -216,9 +216,9 @@ This will show the scraped content before uploading to Trakt.
 1. Go to your [Trakt profile](https://trakt.tv/users/me)
 2. Check the **Lists** section
 3. You should see newly created lists like:
-   - Top Portugal Netflix Movies
-   - Top Portugal Netflix Shows
-   - Top Portugal HBO Movies
+   - Top India Netflix Movies
+   - Top India Netflix Shows
+   - Top India HBO Movies
    - (etc.)
 
 #### Common Issues and Solutions
@@ -256,7 +256,7 @@ Error in workflow execution
 python -c "from dotenv import load_dotenv; import os; load_dotenv(); print('CLIENT_ID found:', bool(os.getenv('CLIENT_ID')))"
 
 # Test API connectivity
-python -c "import requests; print('FlixPatrol accessible:', requests.get('https://flixpatrol.com/top10/netflix/portugal/').status_code == 200)"
+python -c "import requests; print('FlixPatrol accessible:', requests.get('https://flixpatrol.com/top10/netflix/India/').status_code == 200)"
 
 # Test Trakt API
 python -c "import requests, os; from dotenv import load_dotenv; load_dotenv(); headers={'Authorization': f'Bearer {os.getenv(\"ACCESS_TOKEN\")}', 'trakt-api-version': '2', 'trakt-api-key': os.getenv('CLIENT_ID')}; print('Trakt API status:', requests.get('https://api.trakt.tv/users/me', headers=headers).status_code)"
@@ -297,4 +297,4 @@ If you encounter issues during setup:
 
 ---
 
-Congratulations! You should now have a fully functional Top Streaming Services Data Portugal setup. The system will automatically track trending content and keep your Trakt lists updated. 🎉
+Congratulations! You should now have a fully functional Top Streaming Services Data India setup. The system will automatically track trending content and keep your Trakt lists updated. 🎉

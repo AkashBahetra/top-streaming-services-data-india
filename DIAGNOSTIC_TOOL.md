@@ -40,7 +40,7 @@ Run this script when:
 
 ```
 ================================================================================
-Diagnosing: https://flixpatrol.com/top10/netflix/portugal/
+Diagnosing: https://flixpatrol.com/top10/netflix/India/
 Expected section: TOP 10 Movies
 ================================================================================
 

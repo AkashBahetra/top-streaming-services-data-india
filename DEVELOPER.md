@@ -1,6 +1,6 @@
 # Developer Guide
 
-This guide is for developers who want to contribute to or understand the codebase of the Top Streaming Services Data Portugal project.
+This guide is for developers who want to contribute to or understand the codebase of the Top Streaming Services Data India project.
 
 ## 🏗️ Project Architecture
 
@@ -54,8 +54,8 @@ result = tracker.run()  # Returns 0 on success, -1 on error
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/pcarrasqueira/top-streaming-services-data-portugal.git
-cd top-streaming-services-data-portugal
+git clone https://github.com/pcarrasqueira/top-streaming-services-data-India.git
+cd top-streaming-services-data-India
 
 # Install dependencies
 pip install -r requirements.txt
@@ -150,15 +150,15 @@ To add support for a new streaming service:
 1. **Update Configuration**:
    ```python
    # In Config.__init__()
-   self.urls['new_service'] = "https://flixpatrol.com/top10/new-service/portugal/"
+   self.urls['new_service'] = "https://flixpatrol.com/top10/new-service/India/"
    ```
 
 2. **Add List Data**:
    ```python
    # Add to StreamingServiceTracker._init_list_data()
    self.new_service_movies_list_data = {
-       "name": "Top Portugal New Service Movies",
-       "description": "Top movies on New Service Portugal",
+       "name": "Top India New Service Movies",
+       "description": "Top movies on New Service India",
        "privacy": "public",
        "display_numbers": True,
    }

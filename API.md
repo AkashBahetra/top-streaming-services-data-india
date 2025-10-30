@@ -1,6 +1,6 @@
 # API Documentation
 
-This document provides comprehensive information about the APIs used by the Top Streaming Services Data Portugal project, including data structures, endpoints, and integration details.
+This document provides comprehensive information about the APIs used by the Top Streaming Services Data India project, including data structures, endpoints, and integration details.
 
 ## 📡 Overview
 
@@ -15,23 +15,23 @@ The project integrates with two main APIs:
 The project scrapes data from the following FlixPatrol endpoints:
 
 #### Netflix
-- **Current Rankings**: `https://flixpatrol.com/top10/netflix/portugal/`
-- **Kids Content**: `https://flixpatrol.com/top10/netflix/portugal/{yesterday_date}/`
+- **Current Rankings**: `https://flixpatrol.com/top10/netflix/India/`
+- **Kids Content**: `https://flixpatrol.com/top10/netflix/India/{yesterday_date}/`
   - Uses yesterday's date in `YYYY-MM-DD` format
   - Kids content is only available on historical pages
 
 #### HBO Max
-- **Current Rankings**: `https://flixpatrol.com/top10/hbo/portugal/`
+- **Current Rankings**: `https://flixpatrol.com/top10/hbo/India/`
 
 #### Disney+
-- **Current Rankings**: `https://flixpatrol.com/top10/disney/portugal/`
+- **Current Rankings**: `https://flixpatrol.com/top10/disney/India/`
 - Note: Disney+ only provides overall rankings (mixed movies and shows)
 
 #### Apple TV+
-- **Current Rankings**: `https://flixpatrol.com/top10/apple-tv/portugal/`
+- **Current Rankings**: `https://flixpatrol.com/top10/apple-tv/India/`
 
 #### Amazon Prime Video
-- **Current Rankings**: `https://flixpatrol.com/top10/amazon-prime/portugal/`
+- **Current Rankings**: `https://flixpatrol.com/top10/amazon-prime/India/`
 
 ### Scraping Implementation
 
@@ -191,8 +191,8 @@ POST https://api.trakt.tv/users/me/lists
 **Request Body**:
 ```json
 {
-    "name": "Top Portugal Netflix Movies",
-    "description": "List that contains the top 10 movies on Netflix Portugal right now, updated daily",
+    "name": "Top India Netflix Movies",
+    "description": "List that contains the top 10 movies on Netflix India right now, updated daily",
     "privacy": "public",
     "display_numbers": true
 }
@@ -353,14 +353,14 @@ def extract_year(title_tag):
 # Netflix Lists
 NETFLIX_LISTS = {
     "movies": {
-        "name": "Top Portugal Netflix Movies",
-        "slug": "top-portugal-netflix-movies",
-        "description": "Top 10 movies on Netflix Portugal, updated daily"
+        "name": "Top India Netflix Movies",
+        "slug": "top-India-netflix-movies",
+        "description": "Top 10 movies on Netflix India, updated daily"
     },
     "shows": {
-        "name": "Top Portugal Netflix Shows", 
-        "slug": "top-portugal-netflix-shows",
-        "description": "Top 10 TV shows on Netflix Portugal, updated daily"
+        "name": "Top India Netflix Shows", 
+        "slug": "top-India-netflix-shows",
+        "description": "Top 10 TV shows on Netflix India, updated daily"
     }
 }
 
@@ -414,4 +414,4 @@ if not token_status:
 
 ---
 
-This API documentation provides the foundation for understanding and extending the Top Streaming Services Data Portugal project. For additional details, refer to the [Trakt API documentation](https://trakt.docs.apiary.io/) and examine the source code.
+This API documentation provides the foundation for understanding and extending the Top Streaming Services Data India project. For additional details, refer to the [Trakt API documentation](https://trakt.docs.apiary.io/) and examine the source code.

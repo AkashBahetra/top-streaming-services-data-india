@@ -1,13 +1,13 @@
-# Top Streaming Services Data Portugal 🇵🇹
+# Top Streaming Services Data India 🇵🇹
 
-[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/pcarrasqueira/top-streaming-services-data-portugal/cron_job.yml?branch=main)](https://github.com/pcarrasqueira/top-streaming-services-data-portugal/actions)
+[![GitHub Actions](https://img.shields.io/github/actions/workflow/status/pcarrasqueira/top-streaming-services-data-India/cron_job.yml?branch=main)](https://github.com/pcarrasqueira/top-streaming-services-data-India/actions)
 [![Python Version](https://img.shields.io/badge/python-3.13-blue.svg)](https://www.python.org/downloads/)
 
-A comprehensive Python automation tool that tracks the most popular content across major streaming platforms in Portugal. This project scrapes real-time data from [FlixPatrol](https://flixpatrol.com/) and automatically syncs curated top 10 lists to [Trakt.tv](https://trakt.tv/), providing an always up-to-date view of trending movies and TV shows.
+A comprehensive Python automation tool that tracks the most popular content across major streaming platforms in India. This project scrapes real-time data from [FlixPatrol](https://flixpatrol.com/) and automatically syncs curated top 10 lists to [Trakt.tv](https://trakt.tv/), providing an always up-to-date view of trending movies and TV shows.
 
 ## 🎯 Overview
 
-Stay connected with Portugal's streaming trends! This automation tool:
+Stay connected with India's streaming trends! This automation tool:
 
 - 📊 **Tracks Multiple Platforms**: Netflix, HBO Max, Disney+, Apple TV+, and Amazon Prime Video
 - 🔄 **Auto-Sync to Trakt**: Creates and maintains public Trakt lists with trending content
@@ -33,17 +33,17 @@ Stay connected with Portugal's streaming trends! This automation tool:
 
 ### Generated Trakt Lists
 All lists are public and automatically updated with current rankings:
-- Top Portugal Netflix Movies
-- Top Portugal Netflix Shows  
-- Top Portugal Netflix Kids Movies (optional)
-- Top Portugal Netflix Kids Shows (optional)
-- Top Portugal HBO Movies
-- Top Portugal HBO Shows
-- Top Portugal Disney+ (mixed content)
-- Top Portugal Apple TV Movies
-- Top Portugal Apple TV Shows
-- Top Portugal Amazon Prime Movies
-- Top Portugal Amazon Prime Shows
+- Top India Netflix Movies
+- Top India Netflix Shows  
+- Top India Netflix Kids Movies (optional)
+- Top India Netflix Kids Shows (optional)
+- Top India HBO Movies
+- Top India HBO Shows
+- Top India Disney+ (mixed content)
+- Top India Apple TV Movies
+- Top India Apple TV Shows
+- Top India Amazon Prime Movies
+- Top India Amazon Prime Shows
 
 ## 🚀 Quick Start
 
@@ -59,8 +59,8 @@ All lists are public and automatically updated with current rankings:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/pcarrasqueira/top-streaming-services-data-portugal.git
-   cd top-streaming-services-data-portugal
+   git clone https://github.com/pcarrasqueira/top-streaming-services-data-India.git
+   cd top-streaming-services-data-India
    ```
 
 2. **Install dependencies**
@@ -142,10 +142,10 @@ PRINT_LISTS=True python top_pt_stream_services.py
 ### Automated Execution
 
 The script runs automatically via GitHub Actions on the following schedule:
-- **00:00 UTC** (1:00 AM Portugal Time)
-- **08:00 UTC** (9:00 AM Portugal Time)  
-- **12:00 UTC** (1:00 PM Portugal Time)
-- **17:00 UTC** (6:00 PM Portugal Time)
+- **00:00 UTC** (1:00 AM India Time)
+- **08:00 UTC** (9:00 AM India Time)  
+- **12:00 UTC** (1:00 PM India Time)
+- **17:00 UTC** (6:00 PM India Time)
 
 You can also trigger manual runs:
 1. Go to the "Actions" tab in your GitHub repository
@@ -307,12 +307,12 @@ We welcome contributions! Here's how you can help:
 
 The script scrapes data from these FlixPatrol URLs:
 
-- **Netflix**: `https://flixpatrol.com/top10/netflix/portugal/`
-- **Netflix Kids**: `https://flixpatrol.com/top10/netflix/portugal/{yesterday_date}/`
-- **HBO**: `https://flixpatrol.com/top10/hbo/portugal/`
-- **Disney+**: `https://flixpatrol.com/top10/disney/portugal/`
-- **Apple TV**: `https://flixpatrol.com/top10/apple-tv/portugal/`
-- **Prime Video**: `https://flixpatrol.com/top10/amazon-prime/portugal/`
+- **Netflix**: `https://flixpatrol.com/top10/netflix/India/`
+- **Netflix Kids**: `https://flixpatrol.com/top10/netflix/India/{yesterday_date}/`
+- **HBO**: `https://flixpatrol.com/top10/hbo/India/`
+- **Disney+**: `https://flixpatrol.com/top10/disney/India/`
+- **Apple TV**: `https://flixpatrol.com/top10/apple-tv/India/`
+- **Prime Video**: `https://flixpatrol.com/top10/amazon-prime/India/`
 
 ### Trakt API Endpoints
 
@@ -364,8 +364,8 @@ For quick reference:
 
 ## 📞 Support
 
-- **GitHub Issues**: [Create an issue](https://github.com/pcarrasqueira/top-streaming-services-data-portugal/issues)
-- **Discussions**: [Join the discussion](https://github.com/pcarrasqueira/top-streaming-services-data-portugal/discussions)
+- **GitHub Issues**: [Create an issue](https://github.com/pcarrasqueira/top-streaming-services-data-India/issues)
+- **Discussions**: [Join the discussion](https://github.com/pcarrasqueira/top-streaming-services-data-India/discussions)
 - **Trakt API Docs**: [Official Documentation](https://trakt.docs.apiary.io/)
 
 ---

@@ -153,8 +153,8 @@ if __name__ == "__main__":
     print("FlixPatrol Diagnostic Tool")
     print("=" * 80)
 
-    # Test Netflix Portugal page
-    url = "https://flixpatrol.com/top10/netflix/portugal/"
+    # Test Netflix India page
+    url = "https://flixpatrol.com/top10/netflix/India/"
 
     print("\n\n### Testing Movies Section ###")
     diagnose_page(url, "TOP 10 Movies")

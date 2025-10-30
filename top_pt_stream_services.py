@@ -38,20 +38,16 @@ class Config:
 
         # URLs
         self.urls = {
-            "netflix": "https://flixpatrol.com/top10/netflix/portugal/",
-            "netflix_kids": f"https://flixpatrol.com/top10/netflix/portugal/{self.yesterday_date}/",
-            "hbo": "https://flixpatrol.com/top10/hbo/portugal/",
-            "disney": "https://flixpatrol.com/top10/disney/portugal/",
-            "apple": "https://flixpatrol.com/top10/apple-tv/portugal/",
-            "prime": "https://flixpatrol.com/top10/amazon-prime/portugal/",
+            "netflix": "https://flixpatrol.com/top10/netflix/india/",
+            "disney": "https://flixpatrol.com/top10/hotstar/india/",
+            "zee5": "https://flixpatrol.com/top10/zee5/india/",
+            "prime": "https://flixpatrol.com/top10/amazon-prime/india/",
         }
 
         # Section names (used by all services: Netflix, HBO, Apple, Prime, Disney)
         self.sections = {
             "movies": "TOP 10 Movies",
             "shows": "TOP 10 TV Shows",
-            "kids_movies": "TOP 10 Kids Movies",
-            "kids_shows": "TOP 10 Kids TV Shows",
             "overall": "TOP 10 Overall",
         }
 
@@ -73,120 +69,82 @@ yesterday_date = config.yesterday_date
 
 # Flixpatrol URLs
 top_netflix_url = config.urls["netflix"]
-top_netflix_kids_url = config.urls["netflix_kids"]
-top_hbo_url = config.urls["hbo"]
-top_disney_url = config.urls["disney"]
-top_apple_url = config.urls["apple"]
+top_hotstar_url = config.urls["hotstar"]
+top_zee5_url = config.urls["ze5"]
 top_prime_url = config.urls["prime"]
 
 # Sections Names
 top_movies_section = config.sections["movies"]
 top_shows_section = config.sections["shows"]
-top_kids_movies_section = config.sections["kids_movies"]
-top_kids_shows_section = config.sections["kids_shows"]
 top_overrall_section = config.sections["overall"]
 
 # Trakt Lists Data
 
 # Netflix
 trakt_netflix_movies_list_data = {
-    "name": "Top Portugal Netflix Movies",
-    "description": "List that contains the top 10 movies on Netflix Portugal right now, updated daily",
+    "name": "Top India Netflix Movies",
+    "description": "List that contains the top 10 movies on Netflix India right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
 
 trakt_netflix_shows_list_data = {
-    "name": "Top Portugal Netflix Shows",
-    "description": "List that contains the top 10 TV shows on Netflix Portugal right now, updated daily",
+    "name": "Top India Netflix Shows",
+    "description": "List that contains the top 10 TV shows on Netflix India right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
 
-trakt_netflix_kids_movies_list_data = {
-    "name": "Top Portugal Netflix Kids Movies",
-    "description": "List that contains the top 10 kids movies on Netflix Portugal right now, updated daily",
+# hotstar
+trakt_zee5_top_list_data = {
+    "name": "Top India Zee5",
+    "description": "List that contains the top movies and shows on zee5 India right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
 
-trakt_netflix_kids_shows_list_data = {
-    "name": "Top Portugal Netflix Kids Shows",
-    "description": "List that contains the top 10 kids TV shows on Netflix Portugal right now, updated daily",
+# hotstar TV
+trakt_hotstar_movies_list_data = {
+    "name": "Top India hotstar TV Movies",
+    "description": "List that contains the top 10 movies on hotstar TV India right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
 
-# HBO
-trakt_hbo_movies_list_data = {
-    "name": "Top Portugal HBO Movies",
-    "description": "List that contains the top 10 movies on HBO Portugal right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
-
-trakt_hbo_shows_list_data = {
-    "name": "Top Portugal HBO Shows",
-    "description": "List that contains the top 10 TV shows on HBO Portugal right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
-
-# Disney+
-trakt_disney_top_list_data = {
-    "name": "Top Portugal Disney+",
-    "description": "List that contains the top movies and shows on Disney+ Portugal right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
-
-# Apple TV
-trakt_apple_movies_list_data = {
-    "name": "Top Portugal Apple TV Movies",
-    "description": "List that contains the top 10 movies on Apple TV Portugal right now, updated daily",
-    "privacy": "public",
-    "display_numbers": True,
-}
-
-trakt_apple_shows_list_data = {
-    "name": "Top Portugal Apple TV Shows",
-    "description": "List that contains the top 10 TV shows on Apple TV Portugal right now, updated daily",
+trakt_hotstar_shows_list_data = {
+    "name": "Top India hotstar TV Shows",
+    "description": "List that contains the top 10 TV shows on hotstar TV India right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
 
 # Amazon Prime
 trakt_prime_movies_list_data = {
-    "name": "Top Portugal Amazon Prime Movies",
-    "description": "List that contains the top 10 movies on Amazon Prime Video Portugal right now, updated daily",
+    "name": "Top India Amazon Prime Movies",
+    "description": "List that contains the top 10 movies on Amazon Prime Video India right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
 
 trakt_prime_shows_list_data = {
-    "name": "Top Portugal Amazon Prime Shows",
-    "description": "List that contains the top 10 TV shows on Amazon Prime Video Portugal right now, updated daily",
+    "name": "Top India Amazon Prime Shows",
+    "description": "List that contains the top 10 TV shows on Amazon Prime Video India right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
 
 
 # Trakt List slugs
-trakt_netflix_movies_list_slug = "top-portugal-netflix-movies"
-trakt_netflix_shows_list_slug = "top-portugal-netflix-shows"
-trakt_netflix_kids_movies_list_slug = "top-portugal-netflix-kids-movies"
-trakt_netflix_kids_shows_list_slug = "top-portugal-netflix-kids-shows"
+trakt_netflix_movies_list_slug = "top-India-netflix-movies"
+trakt_netflix_shows_list_slug = "top-India-netflix-shows"
 
-trakt_hbo_movies_list_slug = "top-portugal-hbo-movies"
-trakt_hbo_shows_list_slug = "top-portugal-hbo-shows"
+trakt_zee5_list_slug = "top-India-zee5"
 
-trakt_disney_list_slug = "top-portugal-disney"
+trakt_hotstar_movies_list_slug = "top-India-hotstar-tv-movies"
+trakt_hotstar_shows_list_slug = "top-India-hotstar-tv-shows"
 
-trakt_apple_movies_list_slug = "top-portugal-apple-tv-movies"
-trakt_apple_shows_list_slug = "top-portugal-apple-tv-shows"
-
-trakt_prime_movies_list_slug = "top-portugal-amazon-prime-movies"
-trakt_prime_shows_list_slug = "top-portugal-amazon-prime-shows"
+trakt_prime_movies_list_slug = "top-India-amazon-prime-movies"
+trakt_prime_shows_list_slug = "top-India-amazon-prime-shows"
 
 # ============================
 # HELPER METHODS
@@ -476,21 +434,12 @@ def check_lists() -> bool:
         error_create = create_list(trakt_netflix_movies_list_data)
     if trakt_netflix_shows_list_slug not in lists_slugs:
         error_create = create_list(trakt_netflix_shows_list_data)
-    if KIDS_LIST:
-        if trakt_netflix_kids_movies_list_slug not in lists_slugs:
-            error_create = create_list(trakt_netflix_kids_movies_list_data)
-        if trakt_netflix_kids_shows_list_slug not in lists_slugs:
-            error_create = create_list(trakt_netflix_kids_shows_list_data)
-    if trakt_hbo_movies_list_slug not in lists_slugs:
-        error_create = create_list(trakt_hbo_movies_list_data)
-    if trakt_hbo_shows_list_slug not in lists_slugs:
-        error_create = create_list(trakt_hbo_shows_list_data)
-    if trakt_disney_list_slug not in lists_slugs:
-        error_create = create_list(trakt_disney_top_list_data)
-    if trakt_apple_movies_list_slug not in lists_slugs:
-        error_create = create_list(trakt_apple_movies_list_data)
-    if trakt_apple_shows_list_slug not in lists_slugs:
-        error_create = create_list(trakt_apple_shows_list_data)
+    if trakt_zee5_list_slug not in lists_slugs:
+        error_create = create_list(trakt_zee5_top_list_data)
+    if trakt_hotstar_movies_list_slug not in lists_slugs:
+        error_create = create_list(trakt_hotstar_movies_list_data)
+    if trakt_hotstar_shows_list_slug not in lists_slugs:
+        error_create = create_list(trakt_hotstar_shows_list_data)
     if trakt_prime_movies_list_slug not in lists_slugs:
         error_create = create_list(trakt_prime_movies_list_data)
     if trakt_prime_shows_list_slug not in lists_slugs:
@@ -675,15 +624,15 @@ class StreamingServiceTracker:
         """Initialize Trakt list data configurations."""
         # Netflix lists
         self.netflix_movies_list_data = {
-            "name": "Top Portugal Netflix Movies",
-            "description": "List that contains the top 10 movies on Netflix Portugal right now, updated daily",
+            "name": "Top India Netflix Movies",
+            "description": "List that contains the top 10 movies on Netflix India right now, updated daily",
             "privacy": "public",
             "display_numbers": True,
         }
 
         self.netflix_shows_list_data = {
-            "name": "Top Portugal Netflix Shows",
-            "description": "List that contains the top 10 TV shows on Netflix Portugal right now, updated daily",
+            "name": "Top India Netflix Shows",
+            "description": "List that contains the top 10 TV shows on Netflix India right now, updated daily",
             "privacy": "public",
             "display_numbers": True,
         }
@@ -733,13 +682,9 @@ class StreamingServiceTracker:
         scraping_tasks = [
             ("netflix_movies", self.config.urls["netflix"], self.config.sections["movies"]),
             ("netflix_shows", self.config.urls["netflix"], self.config.sections["shows"]),
-            ("netflix_kids_movies", self.config.urls["netflix_kids"], self.config.sections["kids_movies"]),
-            ("netflix_kids_shows", self.config.urls["netflix_kids"], self.config.sections["kids_shows"]),
-            ("hbo_movies", self.config.urls["hbo"], self.config.sections["movies"]),
-            ("hbo_shows", self.config.urls["hbo"], self.config.sections["shows"]),
-            ("disney_overall", self.config.urls["disney"], self.config.sections["overall"]),
-            ("apple_movies", self.config.urls["apple"], self.config.sections["movies"]),
-            ("apple_shows", self.config.urls["apple"], self.config.sections["shows"]),
+            ("zee5_overall", self.config.urls["zee5"], self.config.sections["overall"]),
+            ("hotstar_movies", self.config.urls["hotstar"], self.config.sections["movies"]),
+            ("hotstar_shows", self.config.urls["hotstar"], self.config.sections["shows"]),
             ("prime_movies", self.config.urls["prime"], self.config.sections["movies"]),
             ("prime_shows", self.config.urls["prime"], self.config.sections["shows"]),
         ]
@@ -765,13 +710,9 @@ class StreamingServiceTracker:
         """Print all scraped data for debugging."""
         print_top_list("TOP Netflix Movies", data["netflix_movies"])
         print_top_list("TOP Netflix Shows", data["netflix_shows"])
-        print_top_list("TOP Netflix Kids Movies", data["netflix_kids_movies"])
-        print_top_list("TOP Netflix Kids Shows", data["netflix_kids_shows"])
-        print_top_list("TOP HBO Movies", data["hbo_movies"])
-        print_top_list("TOP HBO Shows", data["hbo_shows"])
-        print_top_list("TOP Disney Overall", data["disney_overall"])
-        print_top_list("TOP Apple TV Movies", data["apple_movies"])
-        print_top_list("TOP Apple TV Shows", data["apple_shows"])
+        print_top_list("TOP Zee5 Overall", data["zee5_overall"])
+        print_top_list("TOP Hotstar TV Movies", data["hotstar_movies"])
+        print_top_list("TOP Hotstar TV Shows", data["hotstar_shows"])
         print_top_list("TOP Amazon Prime Video Movies", data["prime_movies"])
         print_top_list("TOP Amazon Prime Video Shows", data["prime_shows"])
 
@@ -801,13 +742,12 @@ class StreamingServiceTracker:
                 trakt_netflix_movies_list_slug,
                 trakt_netflix_shows_list_slug,
             ),
-            ("hbo", data["hbo_movies"], data["hbo_shows"], trakt_hbo_movies_list_slug, trakt_hbo_shows_list_slug),
             (
-                "apple",
-                data["apple_movies"],
-                data["apple_shows"],
-                trakt_apple_movies_list_slug,
-                trakt_apple_shows_list_slug,
+                "hotstar",
+                data["hotstar_movies"],
+                data["hotstar_shows"],
+                trakt_hotstar_movies_list_slug,
+                trakt_hotstar_shows_list_slug,
             ),
             (
                 "prime",
@@ -827,27 +767,8 @@ class StreamingServiceTracker:
             update_list(shows_slug, shows_update)
 
         # Handle Disney+ list as Disney stopped showing top movies and shows separately
-        disney_update = create_mixed_trakt_list_payload(data["disney_overall"])
-        update_list(trakt_disney_list_slug, disney_update)
-
-        # Handle kids' lists
-        if self.config.KIDS_LIST:
-            kids_streaming_services = [
-                (
-                    "netflix",
-                    data["netflix_kids_movies"],
-                    data["netflix_kids_shows"],
-                    trakt_netflix_kids_movies_list_slug,
-                    trakt_netflix_kids_shows_list_slug,
-                )
-            ]
-
-            for service, movies, shows, movies_slug, shows_slug in kids_streaming_services:
-                movies_update = create_type_trakt_list_payload(movies, "movie")
-                shows_update = create_type_trakt_list_payload(shows, "show")
-
-                update_list(movies_slug, movies_update)
-                update_list(shows_slug, shows_update)
+        zee5_update = create_mixed_trakt_list_payload(data["zee5_overall"])
+        update_list(trakt_zee5_list_slug, zee5_update)
 
     def _report_execution_summary(self, data: Dict[str, Any]) -> None:
         """Report summary of execution including successes and failures."""

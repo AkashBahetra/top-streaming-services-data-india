@@ -1,6 +1,6 @@
 # Contributing Guidelines
 
-Thank you for your interest in contributing to the Top Streaming Services Data Portugal project! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to the Top Streaming Services Data India project! This document provides guidelines and information for contributors.
 
 ## 🤝 Ways to Contribute
 
@@ -31,8 +31,8 @@ Thank you for your interest in contributing to the Top Streaming Services Data P
 
 1. **Fork and Clone**
    ```bash
-   git clone https://github.com/your-username/top-streaming-services-data-portugal.git
-   cd top-streaming-services-data-portugal
+   git clone https://github.com/your-username/top-streaming-services-data-India.git
+   cd top-streaming-services-data-India
    ```
 
 2. **Install Dependencies**
@@ -71,14 +71,14 @@ When adding support for a new streaming platform:
 1. **Add URL Configuration**
    ```python
    # Add to global variables section
-   top_newservice_url = "https://flixpatrol.com/top10/newservice/portugal/"
+   top_newservice_url = "https://flixpatrol.com/top10/newservice/India/"
    ```
 
 2. **Create List Data Structures**
    ```python
    trakt_newservice_movies_list_data = {
-       "name": "Top Portugal NewService Movies",
-       "description": "List that contains the top 10 movies on NewService Portugal right now, updated daily",
+       "name": "Top India NewService Movies",
+       "description": "List that contains the top 10 movies on NewService India right now, updated daily",
        "privacy": "public",
        "display_numbers": True
    }
@@ -251,4 +251,4 @@ By contributing to this project, you agree that your contributions will be licen
 
 ---
 
-Thank you for contributing to Top Streaming Services Data Portugal! 🎉
+Thank you for contributing to Top Streaming Services Data India! 🎉

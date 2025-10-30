@@ -49,6 +49,7 @@ class Config:
             "movies": "TOP 10 Movies",
             "shows": "TOP 10 TV Shows",
             "overall": "TOP 10 Overall",
+            "overall_hotstar": "TOP 10 Overall (in Hindi)",
         }
 
 
@@ -673,7 +674,7 @@ class StreamingServiceTracker:
             ("netflix_movies", self.config.urls["netflix"], self.config.sections["movies"]),
             ("netflix_shows", self.config.urls["netflix"], self.config.sections["shows"]),
             ("zee5_overall", self.config.urls["zee5"], self.config.sections["overall"]),
-            ("hotstar_overall", self.config.urls["hotstar"], self.config.sections["overall"]),
+            ("hotstar_overall", self.config.urls["hotstar"], self.config.sections["overall_hotstar"]),
             ("prime_movies", self.config.urls["prime"], self.config.sections["movies"]),
             ("prime_shows", self.config.urls["prime"], self.config.sections["shows"]),
         ]
@@ -700,8 +701,7 @@ class StreamingServiceTracker:
         print_top_list("TOP Netflix Movies", data["netflix_movies"])
         print_top_list("TOP Netflix Shows", data["netflix_shows"])
         print_top_list("TOP Zee5 Overall", data["zee5_overall"])
-        print_top_list("TOP Hotstar TV Movies", data["hotstar_movies"])
-        print_top_list("TOP Hotstar TV Shows", data["hotstar_shows"])
+        print_top_list("TOP Hotstar Overall", data["hotstar_overall"])
         print_top_list("TOP Amazon Prime Video Movies", data["prime_movies"])
         print_top_list("TOP Amazon Prime Video Shows", data["prime_shows"])
 

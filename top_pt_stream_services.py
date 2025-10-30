@@ -22,9 +22,27 @@ class Config:
     """Configuration management for the streaming services tracker."""
 
     def __init__(self):
-        # Load environment variables
-        self.CLIENT_ID = os.getenv("CLIENT_ID")
-        self.ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
+        # Load environment variables for multiple Trakt.tv accounts
+        
+        # Account 1: Netflix
+        self.NETFLIX_CLIENT_ID = os.getenv("NETFLIX_CLIENT_ID")
+        self.NETFLIX_CLIENT_SECRET = os.getenv("NETFLIX_CLIENT_SECRET")
+        self.NETFLIX_ACCESS_TOKEN = os.getenv("NETFLIX_ACCESS_TOKEN")
+        self.NETFLIX_REFRESH_TOKEN = os.getenv("NETFLIX_REFRESH_TOKEN")
+        
+        # Account 2: Prime Video
+        self.PRIME_CLIENT_ID = os.getenv("PRIME_CLIENT_ID")
+        self.PRIME_CLIENT_SECRET = os.getenv("PRIME_CLIENT_SECRET")
+        self.PRIME_ACCESS_TOKEN = os.getenv("PRIME_ACCESS_TOKEN")
+        self.PRIME_REFRESH_TOKEN = os.getenv("PRIME_REFRESH_TOKEN")
+        
+        # Account 3: Hotstar & Zee5
+        self.OTHERS_CLIENT_ID = os.getenv("OTHERS_CLIENT_ID")
+        self.OTHERS_CLIENT_SECRET = os.getenv("OTHERS_CLIENT_SECRET")
+        self.OTHERS_ACCESS_TOKEN = os.getenv("OTHERS_ACCESS_TOKEN")
+        self.OTHERS_REFRESH_TOKEN = os.getenv("OTHERS_REFRESH_TOKEN")
+        
+        # Other configs
         self.KIDS_LIST = os.getenv("KIDS_LIST", "False").lower() in ("true", "True")
         self.PRINT_LISTS = os.getenv("PRINT_LISTS", "False").lower() in ("true", "True")
 
@@ -57,8 +75,20 @@ class Config:
 # GLOBAL VARIABLES (for backward compatibility)
 # ============================
 config = Config()
-CLIENT_ID = config.CLIENT_ID
-ACCESS_TOKEN = config.ACCESS_TOKEN
+
+# Netflix account credentials
+NETFLIX_CLIENT_ID = config.NETFLIX_CLIENT_ID
+NETFLIX_ACCESS_TOKEN = config.NETFLIX_ACCESS_TOKEN
+
+# Prime Video account credentials
+PRIME_CLIENT_ID = config.PRIME_CLIENT_ID
+PRIME_ACCESS_TOKEN = config.PRIME_ACCESS_TOKEN
+
+# Hotstar & Zee5 account credentials
+OTHERS_CLIENT_ID = config.OTHERS_CLIENT_ID
+OTHERS_ACCESS_TOKEN = config.OTHERS_ACCESS_TOKEN
+
+# Other configs
 KIDS_LIST = config.KIDS_LIST
 PRINT_LISTS = config.PRINT_LISTS
 REQUEST_TIMEOUT = config.REQUEST_TIMEOUT
@@ -81,7 +111,7 @@ top_overrall_section = config.sections["overall"]
 
 # Trakt Lists Data
 
-# Netflix
+# Lists for Netflix (Account 1)
 trakt_netflix_movies_list_data = {
     "name": "Top India Netflix Movies",
     "description": "List that contains the top 10 movies on Netflix India right now, updated daily",
@@ -96,13 +126,36 @@ trakt_netflix_shows_list_data = {
     "display_numbers": True,
 }
 
-# # Zee5
-# trakt_zee5_top_list_data = {
-#     "name": "Top India Zee5 Overall",
-#     "description": "List that contains the top 10 overall content on Zee5 India right now, updated daily",
-#     "privacy": "public",
-#     "display_numbers": True,
-# }
+# Lists for Zee5 and Hotstar (Account 3)
+trakt_zee5_top_list_data = {
+    "name": "Top India Zee5 Overall",
+    "description": "List that contains the top 10 overall content on Zee5 India right now, updated daily",
+    "privacy": "public",
+    "display_numbers": True,
+}
+
+trakt_hotstar_top_list_data = {
+    "name": "Top India Hotstar Overall",
+    "description": ("List that contains the top 10 overall content on Hotstar India "
+                   "(in Hindi) right now, updated daily"),
+    "privacy": "public",
+    "display_numbers": True,
+}
+
+# Lists for Prime Video (Account 2)
+trakt_prime_movies_list_data = {
+    "name": "Top India Amazon Prime Video Movies",
+    "description": "List that contains the top 10 movies on Amazon Prime Video India right now, updated daily",
+    "privacy": "public",
+    "display_numbers": True,
+}
+
+trakt_prime_shows_list_data = {
+    "name": "Top India Amazon Prime Video Shows",
+    "description": "List that contains the top 10 TV shows on Amazon Prime Video India right now, updated daily",
+    "privacy": "public",
+    "display_numbers": True,
+}
 
 # # Hotstar
 # trakt_hotstar_top_list_data = {
@@ -133,10 +186,10 @@ trakt_netflix_shows_list_data = {
 trakt_netflix_movies_list_slug = "top-India-netflix-movies"
 trakt_netflix_shows_list_slug = "top-India-netflix-shows"
 
-# trakt_zee5_list_slug = "top-India-zee5-overall"
-# trakt_hotstar_list_slug = "top-India-hotstar-overall"
-# trakt_prime_movies_list_slug = "top-India-amazon-prime-movies"
-# trakt_prime_shows_list_slug = "top-India-amazon-prime-shows"
+trakt_zee5_list_slug = "top-India-zee5-overall"
+trakt_hotstar_list_slug = "top-India-hotstar-overall"
+trakt_prime_movies_list_slug = "top-India-amazon-prime-movies"
+trakt_prime_shows_list_slug = "top-India-amazon-prime-shows"
 
 # ============================
 # HELPER METHODS
@@ -144,17 +197,26 @@ trakt_netflix_shows_list_slug = "top-India-netflix-shows"
 
 
 # Get headers
-def get_headers() -> Dict[str, str]:
-    """Returns headers with authorization for requests."""
+def get_headers(client_id: str = None, access_token: str = None) -> Dict[str, str]:
+    """Returns headers with authorization for requests.
+    
+    Args:
+        client_id: The Trakt.tv client ID for the appropriate account
+        access_token: The access token for the appropriate account
+    """
+    # Default to Netflix account if no credentials provided
+    client_id = client_id or NETFLIX_CLIENT_ID
+    access_token = access_token or NETFLIX_ACCESS_TOKEN
+    
     user_agent = (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
         "(KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36"
     )
     return {
         "Content-Type": "application/json",
-        "Authorization": f"Bearer {ACCESS_TOKEN}",
+        "Authorization": f"Bearer {access_token}",
         "trakt-api-version": "2",
-        "trakt-api-key": CLIENT_ID,
+        "trakt-api-key": client_id,
         "User-Agent": user_agent,
     }
 
@@ -341,26 +403,121 @@ def retry_request(func):
 # ============================
 
 
+# Refresh Trakt.tv access token
+def refresh_token(
+    client_id: str,
+    client_secret: str,
+    refresh_token: str
+) -> Tuple[Optional[str], Optional[str]]:
+    """Refresh a Trakt.tv access token.
+    
+    Args:
+        client_id: The Trakt.tv client ID
+        client_secret: The Trakt.tv client secret
+        refresh_token: The refresh token to use
+        
+    Returns:
+        Tuple[Optional[str], Optional[str]]: New access token and refresh token, or None if refresh failed
+    """
+    url = "https://api.trakt.tv/oauth/token"
+    data = {
+        "refresh_token": refresh_token,
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "redirect_uri": "urn:ietf:wg:oauth:2.0:oob",
+        "grant_type": "refresh_token"
+    }
+
+    try:
+        response = requests.post(url, json=data, timeout=REQUEST_TIMEOUT)
+        if response.status_code == 200:
+            result = response.json()
+            return result["access_token"], result["refresh_token"]
+        else:
+            logging.error(f"Token refresh failed with status {response.status_code}")
+            return None, None
+    except Exception as e:
+        logging.error(f"Error refreshing token: {e}")
+        return None, None
+
+
 # Check Trakt access token
-def check_token() -> Union[bool, int]:
-    response = requests.get("https://api.trakt.tv/users/me", headers=get_headers(), timeout=REQUEST_TIMEOUT)
+def check_token(
+    client_id: str = None,
+    client_secret: str = None,
+    access_token: str = None,
+    refresh_token: str = None
+) -> Union[bool, Tuple[Optional[str], Optional[str]]]:
+    """Check if a Trakt.tv access token is valid and refresh if needed.
+    
+    Args:
+        client_id: The Trakt.tv client ID to check
+        client_secret: The Trakt.tv client secret
+        access_token: The access token to check
+        refresh_token: The refresh token to use if access token is invalid
+        
+    Returns:
+        Union[bool, Tuple[Optional[str], Optional[str]]]: 
+            - True if token is valid
+            - Tuple of new tokens if refreshed
+            - (None, None) if refresh failed
+    """
+    # Default to Netflix account if no credentials provided
+    if not all([client_id, client_secret, access_token, refresh_token]):
+        client_id = config.NETFLIX_CLIENT_ID
+        client_secret = config.NETFLIX_CLIENT_SECRET
+        access_token = config.NETFLIX_ACCESS_TOKEN
+        refresh_token = config.NETFLIX_REFRESH_TOKEN
+
+    response = requests.get(
+        "https://api.trakt.tv/users/me", 
+        headers=get_headers(client_id, access_token), 
+        timeout=REQUEST_TIMEOUT
+    )
+    
     if response.status_code == 200:
-        # TO DO - Implement a refresh token method when the access token is almost expired
         return True
+    elif response.status_code == 401:  # Unauthorized - try refreshing token
+        logging.info("Access token expired, attempting refresh...")
+        return refresh_token(client_id, client_secret, refresh_token)
     else:
-        return response.status_code
+        logging.error(f"Token check failed with status {response.status_code}")
+        return None, None
 
 
 # Get Trakt user's lists
-def get_lists() -> List[Dict[str, Any]]:
-    response = requests.get("https://api.trakt.tv/users/me/lists", headers=get_headers(), timeout=REQUEST_TIMEOUT)
+def get_lists(client_id: str = None, access_token: str = None) -> List[Dict[str, Any]]:
+    """Get all lists for a Trakt.tv user.
+    
+    Args:
+        client_id: The Trakt.tv client ID to use
+        access_token: The access token to use
+    Returns:
+        List[Dict[str, Any]]: List of Trakt.tv lists
+    """
+    response = requests.get(
+        "https://api.trakt.tv/users/me/lists", 
+        headers=get_headers(client_id, access_token), 
+        timeout=REQUEST_TIMEOUT
+    )
     return response.json()
 
 
 # Get a list by ID
-def get_list(list_id: str) -> Dict[str, Any]:
+def get_list(list_id: str, client_id: str = None, access_token: str = None) -> Dict[str, Any]:
+    """Get a specific Trakt.tv list.
+    
+    Args:
+        list_id: ID of the list to get
+        client_id: The Trakt.tv client ID to use
+        access_token: The access token to use
+    Returns:
+        Dict[str, Any]: List details
+    """
     response = requests.get(
-        f"https://api.trakt.tv/users/me/lists/{list_id}", headers=get_headers(), timeout=REQUEST_TIMEOUT
+        f"https://api.trakt.tv/users/me/lists/{list_id}", 
+        headers=get_headers(client_id, access_token), 
+        timeout=REQUEST_TIMEOUT
     )
     return response.json()
 
@@ -375,26 +532,54 @@ def get_list_id(list_slug: str) -> Optional[int]:
 
 
 # Get a list items
-def get_list_items(list_id: str) -> Dict[str, List[Dict[str, Any]]]:
+def get_list_items(list_id: str, client_id: str = None, access_token: str = None) -> Dict[str, List[Dict[str, Any]]]:
+    """Get items from a Trakt.tv list.
+    
+    Args:
+        list_id: The ID of the list to get items from
+        client_id: The Trakt.tv client ID for the appropriate account
+        access_token: The access token for the appropriate account
+    """
     response = requests.get(
-        f"https://api.trakt.tv/users/me/lists/{list_id}/items", headers=get_headers(), timeout=REQUEST_TIMEOUT
+        f"https://api.trakt.tv/users/me/lists/{list_id}/items", 
+        headers=get_headers(client_id, access_token), 
+        timeout=REQUEST_TIMEOUT
     )
     parsed_items = parse_items(response.json())
     return parsed_items
 
 
 # Delete a list by ID
-def delete_list(list_id: str) -> int:
+def delete_list(list_id: str, client_id: str = None, access_token: str = None) -> int:
+    """Delete a Trakt.tv list.
+    
+    Args:
+        list_id: The ID of the list to delete
+        client_id: The Trakt.tv client ID for the appropriate account
+        access_token: The access token for the appropriate account
+    """
     response = requests.delete(
-        f"https://api.trakt.tv/users/me/lists/{list_id}", headers=get_headers(), timeout=REQUEST_TIMEOUT
+        f"https://api.trakt.tv/users/me/lists/{list_id}", 
+        headers=get_headers(client_id, access_token), 
+        timeout=REQUEST_TIMEOUT
     )
     return response.status_code
 
 
 @retry_request
-def create_list(list_data: Dict[str, Any]) -> requests.Response:
+def create_list(list_data: Dict[str, Any], client_id: str = None, access_token: str = None) -> requests.Response:
+    """Create a new list in Trakt.tv.
+    
+    Args:
+        list_data: The data for creating the list
+        client_id: The Trakt.tv client ID for the appropriate account
+        access_token: The access token for the appropriate account
+    """
     response = requests.post(
-        "https://api.trakt.tv/users/me/lists", headers=get_headers(), json=list_data, timeout=REQUEST_TIMEOUT
+        "https://api.trakt.tv/users/me/lists", 
+        headers=get_headers(client_id, access_token), 
+        json=list_data, 
+        timeout=REQUEST_TIMEOUT
     )
     if response and response.status_code == 201:
         logging.info(f"List '{list_data['name']}' created successfully.")
@@ -416,22 +601,69 @@ def empty_list(list_id: str) -> int:
 
 
 # Check necessary lists
-def check_lists() -> bool:
-    lists = get_lists()
-    lists_slugs = [list["ids"]["slug"] for list in lists]
-    logging.debug(f"Lists slugs: {lists_slugs}")
+def check_lists(config: Config) -> bool:
+    """Check if lists exist, create them if they don't.
+    
+    Args:
+        config: The configuration object containing account credentials
+    Returns:
+        bool: True if any error occurred, False otherwise
+    """
     error_create = False
 
-    if trakt_netflix_movies_list_slug not in lists_slugs:
-        error_create = create_list(trakt_netflix_movies_list_data)
-    if trakt_netflix_shows_list_slug not in lists_slugs:
-        error_create = create_list(trakt_netflix_shows_list_data)
-    # if trakt_zee5_list_slug not in lists_slugs:
-    #     error_create = create_list(trakt_zee5_top_list_data)
-    # if trakt_hotstar_list_slug not in lists_slugs:
-    #     error_create = create_list(trakt_hotstar_top_list_data)
-    # if trakt_prime_movies_list_slug not in lists_slugs:
-    #     error_create = create_list(trakt_prime_movies_list_data)
+    # Check Netflix lists
+    netflix_lists = get_lists(config.NETFLIX_CLIENT_ID, config.NETFLIX_ACCESS_TOKEN)
+    netflix_slugs = [list["ids"]["slug"] for list in netflix_lists]
+    logging.debug(f"Netflix lists slugs: {netflix_slugs}")
+    
+    if trakt_netflix_movies_list_slug not in netflix_slugs:
+        error_create = create_list(
+            trakt_netflix_movies_list_data,
+            config.NETFLIX_CLIENT_ID,
+            config.NETFLIX_ACCESS_TOKEN
+        )
+    if trakt_netflix_shows_list_slug not in netflix_slugs:
+        error_create = create_list(
+            trakt_netflix_shows_list_data,
+            config.NETFLIX_CLIENT_ID,
+            config.NETFLIX_ACCESS_TOKEN
+        )
+
+    # Check Prime Video lists
+    prime_lists = get_lists(config.PRIME_CLIENT_ID, config.PRIME_ACCESS_TOKEN)
+    prime_slugs = [list["ids"]["slug"] for list in prime_lists]
+    logging.debug(f"Prime Video lists slugs: {prime_slugs}")
+    
+    if trakt_prime_movies_list_slug not in prime_slugs:
+        error_create = create_list(
+            trakt_prime_movies_list_data,
+            config.PRIME_CLIENT_ID,
+            config.PRIME_ACCESS_TOKEN
+        )
+    if trakt_prime_shows_list_slug not in prime_slugs:
+        error_create = create_list(
+            trakt_prime_shows_list_data,
+            config.PRIME_CLIENT_ID,
+            config.PRIME_ACCESS_TOKEN
+        )
+
+    # Check Hotstar and Zee5 lists
+    others_lists = get_lists(config.OTHERS_CLIENT_ID, config.OTHERS_ACCESS_TOKEN)
+    others_slugs = [list["ids"]["slug"] for list in others_lists]
+    logging.debug(f"Others lists slugs: {others_slugs}")
+    
+    if trakt_zee5_list_slug not in others_slugs:
+        error_create = create_list(
+            trakt_zee5_top_list_data,
+            config.OTHERS_CLIENT_ID,
+            config.OTHERS_ACCESS_TOKEN
+        )
+    if trakt_hotstar_list_slug not in others_slugs:
+        error_create = create_list(
+            trakt_hotstar_top_list_data,
+            config.OTHERS_CLIENT_ID,
+            config.OTHERS_ACCESS_TOKEN
+        )
     # if trakt_prime_shows_list_slug not in lists_slugs:
     #     error_create = create_list(trakt_prime_shows_list_data)
     logging.debug("Lists checked!")
@@ -572,14 +804,27 @@ def create_mixed_trakt_list_payload(top_list: List[Tuple[str, str, str]]) -> Dic
 
 # Update a trakt list
 @retry_request
-def update_list(list_slug: str, payload: Dict[str, List[Dict[str, Any]]]) -> Union[requests.Response, int]:
+def update_list(
+    list_slug: str, 
+    payload: Dict[str, List[Dict[str, Any]]], 
+    client_id: str = None, 
+    access_token: str = None
+) -> Union[requests.Response, int]:
+    """Update a list in Trakt.tv with new content.
+    
+    Args:
+        list_slug: The slug of the list to update
+        payload: The content to update the list with
+        client_id: The Trakt.tv client ID for the appropriate account
+        access_token: The access token for the appropriate account
+    """
     # Empty the list only if payload is not empty
     if payload.get("movies") or payload.get("shows"):
-        empty_list(list_slug)
+        empty_list(list_slug, client_id, access_token)
         logging.info(f"Updating list {list_slug} ...")
         response = requests.post(
             f"https://api.trakt.tv/users/me/lists/{list_slug}/items",
-            headers=get_headers(),
+            headers=get_headers(client_id, access_token),
             json=payload,
             timeout=REQUEST_TIMEOUT,
         )
@@ -705,15 +950,75 @@ class StreamingServiceTracker:
         print_top_list("TOP Amazon Prime Video Shows", data["prime_shows"])
 
     def _validate_trakt_setup(self) -> bool:
-        """Validate Trakt token and create necessary lists."""
-        # Check the Trakt access token
-        token_status = check_token()
-        logging.info(f"Trakt access token status: {token_status}")
-        if token_status is not True:
+        """Validate Trakt tokens and create necessary lists for all accounts."""
+        # Check Netflix account
+        netflix_result = check_token(
+            self.config.NETFLIX_CLIENT_ID,
+            self.config.NETFLIX_CLIENT_SECRET,
+            self.config.NETFLIX_ACCESS_TOKEN,
+            self.config.NETFLIX_REFRESH_TOKEN
+        )
+        if netflix_result is True:
+            logging.info("Netflix Trakt token is valid")
+        elif isinstance(netflix_result, tuple):
+            new_access, new_refresh = netflix_result
+            if new_access and new_refresh:
+                logging.info("Netflix Trakt token refreshed successfully")
+                self.config.NETFLIX_ACCESS_TOKEN = new_access
+                self.config.NETFLIX_REFRESH_TOKEN = new_refresh
+            else:
+                logging.error("Failed to refresh Netflix Trakt token")
+                return False
+        else:
+            logging.error("Failed to validate Netflix Trakt token")
             return False
 
-        # Check necessary lists
-        if check_lists() is True:
+        # Check Prime Video account
+        prime_result = check_token(
+            self.config.PRIME_CLIENT_ID,
+            self.config.PRIME_CLIENT_SECRET,
+            self.config.PRIME_ACCESS_TOKEN,
+            self.config.PRIME_REFRESH_TOKEN
+        )
+        if prime_result is True:
+            logging.info("Prime Video Trakt token is valid")
+        elif isinstance(prime_result, tuple):
+            new_access, new_refresh = prime_result
+            if new_access and new_refresh:
+                logging.info("Prime Video Trakt token refreshed successfully")
+                self.config.PRIME_ACCESS_TOKEN = new_access
+                self.config.PRIME_REFRESH_TOKEN = new_refresh
+            else:
+                logging.error("Failed to refresh Prime Video Trakt token")
+                return False
+        else:
+            logging.error("Failed to validate Prime Video Trakt token")
+            return False
+
+        # Check Hotstar & Zee5 account
+        others_result = check_token(
+            self.config.OTHERS_CLIENT_ID,
+            self.config.OTHERS_CLIENT_SECRET,
+            self.config.OTHERS_ACCESS_TOKEN,
+            self.config.OTHERS_REFRESH_TOKEN
+        )
+        if others_result is True:
+            logging.info("Others Trakt token is valid")
+        elif isinstance(others_result, tuple):
+            new_access, new_refresh = others_result
+            if new_access and new_refresh:
+                logging.info("Others Trakt token refreshed successfully")
+                self.config.OTHERS_ACCESS_TOKEN = new_access
+                self.config.OTHERS_REFRESH_TOKEN = new_refresh
+            else:
+                logging.error("Failed to refresh Others Trakt token")
+                return False
+        else:
+            logging.error("Failed to validate Others Trakt token")
+            return False
+
+        # Check and create necessary lists for all accounts
+        if check_lists(self.config) is True:
             logging.error("Failed to create necessary lists")
             return False
 
@@ -721,38 +1026,56 @@ class StreamingServiceTracker:
 
     def _update_all_lists(self, data: Dict[str, Any]) -> None:
         """Update all Trakt lists with scraped data."""
-        # List of streaming services and corresponding data
-        streaming_services = [
-            (
-                "netflix",
-                data["netflix_movies"],
-                data["netflix_shows"],
-                trakt_netflix_movies_list_slug,
-                trakt_netflix_shows_list_slug,
-            ),
-            # (
-            #     "prime",
-            #     data["prime_movies"],
-            #     data["prime_shows"],
-            #     trakt_prime_movies_list_slug,
-            #     trakt_prime_shows_list_slug,
-            # ),
-        ]
+        # Update Netflix lists using Netflix account
+        logging.info("Updating Netflix lists...")
+        movies_update = create_type_trakt_list_payload(data["netflix_movies"], "movie")
+        shows_update = create_type_trakt_list_payload(data["netflix_shows"], "show")
+        update_list(
+            trakt_netflix_movies_list_slug,
+            movies_update,
+            self.config.NETFLIX_CLIENT_ID,
+            self.config.NETFLIX_ACCESS_TOKEN
+        )
+        update_list(
+            trakt_netflix_shows_list_slug,
+            shows_update,
+            self.config.NETFLIX_CLIENT_ID,
+            self.config.NETFLIX_ACCESS_TOKEN
+        )
 
-        # Create and update lists for each streaming service
-        for service, movies, shows, movies_slug, shows_slug in streaming_services:
-            movies_update = create_type_trakt_list_payload(movies, "movie")
-            shows_update = create_type_trakt_list_payload(shows, "show")
+        # Update Prime Video lists using Prime account
+        logging.info("Updating Prime Video lists...")
+        prime_movies_update = create_type_trakt_list_payload(data["prime_movies"], "movie")
+        prime_shows_update = create_type_trakt_list_payload(data["prime_shows"], "show")
+        update_list(
+            trakt_prime_movies_list_slug,
+            prime_movies_update,
+            self.config.PRIME_CLIENT_ID,
+            self.config.PRIME_ACCESS_TOKEN
+        )
+        update_list(
+            trakt_prime_shows_list_slug,
+            prime_shows_update,
+            self.config.PRIME_CLIENT_ID,
+            self.config.PRIME_ACCESS_TOKEN
+        )
 
-            update_list(movies_slug, movies_update)
-            update_list(shows_slug, shows_update)
-
-        # Handle Overall lists for Zee5 and Hotstar
-        # zee5_update = create_mixed_trakt_list_payload(data["zee5_overall"])
-        # update_list(trakt_zee5_list_slug, zee5_update)
-
-        # hotstar_update = create_mixed_trakt_list_payload(data["hotstar_overall"])
-        # update_list(trakt_hotstar_list_slug, hotstar_update)
+        # Update Hotstar and Zee5 lists using Others account
+        logging.info("Updating Hotstar and Zee5 lists...")
+        zee5_update = create_mixed_trakt_list_payload(data["zee5_overall"])
+        hotstar_update = create_mixed_trakt_list_payload(data["hotstar_overall"])
+        update_list(
+            trakt_zee5_list_slug,
+            zee5_update,
+            self.config.OTHERS_CLIENT_ID,
+            self.config.OTHERS_ACCESS_TOKEN
+        )
+        update_list(
+            trakt_hotstar_list_slug,
+            hotstar_update,
+            self.config.OTHERS_CLIENT_ID,
+            self.config.OTHERS_ACCESS_TOKEN
+        )
 
     def _report_execution_summary(self, data: Dict[str, Any]) -> None:
         """Report summary of execution including successes and failures."""

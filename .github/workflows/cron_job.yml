@@ -9,7 +9,6 @@ jobs:
   build:
     name: Build and Update Tokens
     runs-on: ubuntu-latest
-    environment: Dev
     permissions:
       contents: write
       actions: write
@@ -80,12 +79,12 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
           # Update GitHub environment secrets for future runs
-          gh secret set ACCESS_TOKEN --body "$access_token" --env Dev
-          gh secret set REFRESH_TOKEN --body "$refresh_token" --env Dev
+          gh secret set ACCESS_TOKEN --body "$access_token"
+          gh secret set REFRESH_TOKEN --body "$refresh_token"
 
           # Verify the secrets were updated
           echo "Verifying token update..."
-          if ! gh secret list --env Dev | grep -q ACCESS_TOKEN; then
+          if ! gh secret list | grep -q ACCESS_TOKEN; then
             echo "Failed to update ACCESS_TOKEN"
             exit 1
           fi

@@ -156,31 +156,6 @@ trakt_prime_shows_list_data = {
     "display_numbers": True,
 }
 
-# # Hotstar
-# trakt_hotstar_top_list_data = {
-#     "name": "Top India Hotstar Overall",
-#     "description": ("List that contains the top 10 overall content on Hotstar India "
-#                    "(in Hindi) right now, updated daily"),
-#     "privacy": "public",
-#     "display_numbers": True,
-# }
-
-# # Amazon Prime
-# trakt_prime_movies_list_data = {
-#     "name": "Top India Amazon Prime Movies",
-#     "description": "List that contains the top 10 movies on Amazon Prime Video India right now, updated daily",
-#     "privacy": "public",
-#     "display_numbers": True,
-# }
-
-# trakt_prime_shows_list_data = {
-#     "name": "Top India Amazon Prime Shows",
-#     "description": "List that contains the top 10 TV shows on Amazon Prime Video India right now, updated daily",
-#     "privacy": "public",
-#     "display_numbers": True,
-# }
-
-
 # Trakt List slugs
 trakt_netflix_movies_list_slug = "top-india-netflix-movies"
 trakt_netflix_shows_list_slug = "top-india-netflix-shows"
@@ -204,8 +179,8 @@ def get_headers(client_id: str = None, access_token: str = None) -> Dict[str, st
         access_token: The access token for the appropriate account
     """
     # Default to Netflix account if no credentials provided
-    client_id = client_id or NETFLIX_CLIENT_ID
-    access_token = access_token or NETFLIX_ACCESS_TOKEN
+    client_id = client_id
+    access_token = access_token
 
     user_agent = (
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
@@ -543,10 +518,7 @@ def get_list_items(list_id: str, client_id: str = None, access_token: str = None
         headers=get_headers(client_id, access_token),
         timeout=REQUEST_TIMEOUT,
     )
-    logging.info(f"Response status code: {response.status_code}")
-    logging.debug(f"Response content: {response.json()}")
     parsed_items = parse_items(response.json())
-    logging.info(f"Retrieved {len(parsed_items['movies'])} movies and {len(parsed_items['shows'])} shows from list.")
     return parsed_items
 
 
@@ -590,8 +562,7 @@ def create_list(list_data: Dict[str, Any], client_id: str = None, access_token: 
 # Empty a list
 def empty_list(list_id: str, client_id: str, access_token: str) -> int:
     logging.info("Emptying list...")
-    logging.info(f"List ID: {list_id}, Client ID: {client_id}, Access Token: {access_token}")
-    list_items = get_list_items(list_id)
+    list_items = get_list_items(list_id, client_id, access_token)
     response = requests.post(
         f"https://api.trakt.tv/users/me/lists/{list_id}/items/remove",
         headers=get_headers(client_id, access_token),

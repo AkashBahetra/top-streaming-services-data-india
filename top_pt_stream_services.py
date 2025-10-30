@@ -70,7 +70,7 @@ yesterday_date = config.yesterday_date
 # Flixpatrol URLs
 top_netflix_url = config.urls["netflix"]
 top_hotstar_url = config.urls["hotstar"]
-top_zee5_url = config.urls["ze5"]
+top_zee5_url = config.urls["zee5"]
 top_prime_url = config.urls["prime"]
 
 # Sections Names

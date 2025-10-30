@@ -1,12 +1,13 @@
-name: Get Top PT Stream Services
+name: "Get Top PT Stream Services"
 
-"on":
+on:
   workflow_dispatch:
   schedule:
     - cron: '0 0,8,12,17 * * *'  # 00:00, 08:00, 12:00, 17:00 todos os dias
 
 jobs:
   build:
+    name: Build and Update Tokens
     runs-on: ubuntu-latest
     environment: Dev
     permissions:
@@ -44,7 +45,7 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          GH_TOKEN: ${{ secrets.GH_PAT }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           response=$(curl -s --location 'https://api.trakt.tv/oauth/token' \
             --header 'Content-Type: application/json' \

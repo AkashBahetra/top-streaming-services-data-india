@@ -9,39 +9,34 @@ A comprehensive Python automation tool that tracks the most popular content acro
 
 Stay connected with India's streaming trends! This automation tool:
 
-- 📊 **Tracks Multiple Platforms**: Netflix, HBO Max, Disney+, Apple TV+, and Amazon Prime Video
+- 📊 **Tracks Multiple Platforms**: Netflix, Hotstar, Zee5, and Amazon Prime Video
 - 🔄 **Auto-Sync to Trakt**: Creates and maintains public Trakt lists with trending content
 - ⏰ **Real-Time Updates**: Runs 4 times daily via GitHub Actions (00:00, 08:00, 12:00, 17:00 UTC)
-- 🎬 **Comprehensive Coverage**: Movies, TV shows, and optional kids content
+- 🎬 **Comprehensive Coverage**: Movies, TV shows
 - 🔒 **Secure**: Uses OAuth token refresh for reliable Trakt API access
 
 ## ✨ Features
 
 ### Core Functionality
 - **Multi-Platform Scraping**: Automatically extracts top 10 content from major streaming services
+- **Multi Account Support**: Uses 3 different accounts to bypass VIP List Limits
 - **Intelligent Content Matching**: Uses Trakt's search API to accurately identify movies and shows
 - **Dynamic List Management**: Creates, updates, and maintains Trakt lists with proper rankings
 - **Error Handling**: Robust retry mechanisms and comprehensive logging
 - **Token Management**: Automatic OAuth token refresh for uninterrupted operation
 
 ### Supported Streaming Services
-- 🔴 **Netflix**: Movies, TV Shows, Kids Movies, Kids TV Shows
-- 🟣 **HBO Max**: Movies, TV Shows  
-- 🔵 **Disney+**: Overall top content (mixed movies and shows)
-- 🍎 **Apple TV+**: Movies, TV Shows
+- 🔴 **Netflix**: Movies, TV Shows
+- 🔵 **Hotstar**: Overall top content (mixed movies and shows)
+- 🍎 **Zee5**: Overall top content (mixed movies and shows)
 - 📦 **Amazon Prime Video**: Movies, TV Shows
 
 ### Generated Trakt Lists
 All lists are public and automatically updated with current rankings:
 - Top India Netflix Movies
 - Top India Netflix Shows  
-- Top India Netflix Kids Movies (optional)
-- Top India Netflix Kids Shows (optional)
-- Top India HBO Movies
-- Top India HBO Shows
-- Top India Disney+ (mixed content)
-- Top India Apple TV Movies
-- Top India Apple TV Shows
+- Top India Hotstar (mixed content)
+- Top India Zee5 (mixed content)
 - Top India Amazon Prime Movies
 - Top India Amazon Prime Shows
 
@@ -112,32 +107,22 @@ PRINT_LISTS=False       # Print scraped lists to console (default: False)
 
 Add the following secrets to your GitHub repository:
 
-- `CLIENT_ID`: Your Trakt client ID
-- `CLIENT_SECRET`: Your Trakt client secret  
-- `ACCESS_TOKEN`: Your Trakt access token
-- `REFRESH_TOKEN`: Your Trakt refresh token
+- `NETFLIX_CLIENT_ID`: Your 1st Trakt client ID
+- `NETFLIX_CLIENT_SECRET`: Your 1st Trakt client secret  
+- `NETFLIX_ACCESS_TOKEN`: Your 1st Trakt access token
+- `NETFLIX_REFRESH_TOKEN`: Your 1st Trakt refresh token
+- `PRIME_CLIENT_ID`: Your 2nd Trakt client ID
+- `PRIME_CLIENT_SECRET`: Your 2nd Trakt client secret  
+- `PRIME_ACCESS_TOKEN`: Your 2nd Trakt access token
+- `PRIME_REFRESH_TOKEN`: Your 2nd Trakt refresh token
+- `OTHERS_CLIENT_ID`: Your 3rd Trakt client ID
+- `OTHERS_CLIENT_SECRET`: Your 3rd Trakt client secret  
+- `OTHERS_ACCESS_TOKEN`: Your 3rd Trakt access token
+- `OTHERS_REFRESH_TOKEN`: Your 3rd Trakt refresh token
 - `GH_PAT`: GitHub Personal Access Token (for secret updates)
 
 Add these variables to your repository:
-- `KIDS_LIST`: Set to `true` to include kids content
 - `PRINT_LISTS`: Set to `true` to enable console output
-
-## 🔧 Usage
-
-### Manual Execution
-
-Run the script manually for immediate updates:
-
-```bash
-# Basic execution
-python top_pt_stream_services.py
-
-# With environment variables
-CLIENT_ID=your_id ACCESS_TOKEN=your_token python top_pt_stream_services.py
-
-# Enable debug output
-PRINT_LISTS=True python top_pt_stream_services.py
-```
 
 ### Automated Execution
 
@@ -308,11 +293,9 @@ We welcome contributions! Here's how you can help:
 The script scrapes data from these FlixPatrol URLs:
 
 - **Netflix**: `https://flixpatrol.com/top10/netflix/India/`
-- **Netflix Kids**: `https://flixpatrol.com/top10/netflix/India/{yesterday_date}/`
-- **HBO**: `https://flixpatrol.com/top10/hbo/India/`
-- **Disney+**: `https://flixpatrol.com/top10/disney/India/`
-- **Apple TV**: `https://flixpatrol.com/top10/apple-tv/India/`
-- **Prime Video**: `https://flixpatrol.com/top10/amazon-prime/India/`
+- **Hotstar**: `https://flixpatrol.com/top10/hotstar/India/`
+- **Zee5**: `https://flixpatrol.com/top10/zee5/India/`
+- **Prime Video**: `https://flixpatrol.com/top10/amazon-prime-video/India/`
 
 ### Trakt API Endpoints
 

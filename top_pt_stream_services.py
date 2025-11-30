@@ -136,7 +136,9 @@ trakt_zee5_top_list_data = {
 
 trakt_jiohotstar_top_list_data = {
     "name": "Top India jiohotstar Overall",
-    "description": "List that contains the top 10 overall content on jiohotstar India (in Hindi) right now, updated daily",
+    "description": (
+        "List that contains the top 10 overall content on jiohotstar India (in Hindi) " "right now, updated daily"
+    ),
     "privacy": "public",
     "display_numbers": True,
 }
@@ -284,7 +286,9 @@ def scrape_top10(url: str, section_title: str) -> Optional[List[Tuple[str, str, 
                         # Try to find rank with specific class, fall back to first td if not found
                         rank_td = row.find(
                             "td",
-                            class_="table-td w-12 font-semibold text-right text-gray-500 table-hover:text-gray-400",
+                            class_=(
+                                "table-td w-12 font-semibold text-right " "text-gray-500 table-hover:text-gray-400"
+                            ),
                         )
                         if not rank_td:
                             # Fallback: try to find first td element

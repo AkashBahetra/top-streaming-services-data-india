@@ -29,7 +29,11 @@ def diagnose_page(url, section_title):
 
     headers = {
         "Content-Type": "application/json",
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+        "User-Agent": (
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/130.0.0.0 Safari/537.36"
+        ),
         "Cookie": "_nss=1",
     }
 

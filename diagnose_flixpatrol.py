@@ -10,7 +10,6 @@ This will help identify what changes FlixPatrol made to their website
 and verify that the scraper can handle them correctly.
 """
 import logging
-import sys
 
 import requests
 from bs4 import BeautifulSoup
@@ -39,7 +38,7 @@ def diagnose_page(url, section_title):
         print(f"\nStatus code: {response.status_code}")
 
         if response.status_code != 200:
-            print(f"ERROR: Failed to retrieve page")
+            print("ERROR: Failed to retrieve page")
             return
 
         soup = BeautifulSoup(response.content, "html.parser")
@@ -74,7 +73,7 @@ def diagnose_page(url, section_title):
                 break
 
         if section_header:
-            print(f"\n--- ANALYZING STRUCTURE AFTER HEADER ---")
+            print("\n--- ANALYZING STRUCTURE AFTER HEADER ---")
             print(f"Header tag: {section_header.name}")
             print(f"Header text: {section_header.get_text(strip=True)}")
 
@@ -131,7 +130,7 @@ def diagnose_page(url, section_title):
 def test_scraper(url, section_title):
     """Test the actual scraper with the URL."""
     print(f"\n{'='*80}")
-    print(f"TESTING SCRAPER")
+    print("TESTING SCRAPER")
     print(f"URL: {url}")
     print(f"Section: {section_title}")
     print("=" * 80)

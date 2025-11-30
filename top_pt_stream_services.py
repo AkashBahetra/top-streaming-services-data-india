@@ -36,7 +36,7 @@ class Config:
         self.PRIME_ACCESS_TOKEN = os.getenv("PRIME_ACCESS_TOKEN")
         self.PRIME_REFRESH_TOKEN = os.getenv("PRIME_REFRESH_TOKEN")
 
-        # Account 3: Hotstar & Zee5
+        # Account 3: jiohotstar & Zee5
         self.OTHERS_CLIENT_ID = os.getenv("OTHERS_CLIENT_ID")
         self.OTHERS_CLIENT_SECRET = os.getenv("OTHERS_CLIENT_SECRET")
         self.OTHERS_ACCESS_TOKEN = os.getenv("OTHERS_ACCESS_TOKEN")
@@ -57,7 +57,7 @@ class Config:
         # URLs
         self.urls = {
             "netflix": "https://flixpatrol.com/top10/netflix/india/",
-            "hotstar": "https://flixpatrol.com/top10/hotstar/india/",
+            "jiohotstar": "https://flixpatrol.com/top10/jiohotstar/india/",
             "zee5": "https://flixpatrol.com/top10/zee5/india/",
             "prime": "https://flixpatrol.com/top10/amazon-prime/india/",
         }
@@ -67,7 +67,7 @@ class Config:
             "movies": "TOP 10 Movies",
             "shows": "TOP 10 TV Shows",
             "overall": "TOP 10 Overall",
-            "overall_hotstar": "TOP 10 Overall (in Hindi)",
+            "overall_jiohotstar": "TOP 10 Overall (in Hindi)",
         }
 
 
@@ -84,7 +84,7 @@ NETFLIX_ACCESS_TOKEN = config.NETFLIX_ACCESS_TOKEN
 PRIME_CLIENT_ID = config.PRIME_CLIENT_ID
 PRIME_ACCESS_TOKEN = config.PRIME_ACCESS_TOKEN
 
-# Hotstar & Zee5 account credentials
+# jiohotstar & Zee5 account credentials
 OTHERS_CLIENT_ID = config.OTHERS_CLIENT_ID
 OTHERS_ACCESS_TOKEN = config.OTHERS_ACCESS_TOKEN
 
@@ -100,7 +100,7 @@ yesterday_date = config.yesterday_date
 
 # Flixpatrol URLs
 top_netflix_url = config.urls["netflix"]
-top_hotstar_url = config.urls["hotstar"]
+top_jiohotstar_url = config.urls["jiohotstar"]
 top_zee5_url = config.urls["zee5"]
 top_prime_url = config.urls["prime"]
 
@@ -126,7 +126,7 @@ trakt_netflix_shows_list_data = {
     "display_numbers": True,
 }
 
-# Lists for Zee5 and Hotstar (Account 3)
+# Lists for Zee5 and jiohotstar (Account 3)
 trakt_zee5_top_list_data = {
     "name": "Top India Zee5 Overall",
     "description": "List that contains the top 10 overall content on Zee5 India right now, updated daily",
@@ -134,9 +134,9 @@ trakt_zee5_top_list_data = {
     "display_numbers": True,
 }
 
-trakt_hotstar_top_list_data = {
-    "name": "Top India Hotstar Overall",
-    "description": "List that contains the top 10 overall content on Hotstar India (in Hindi) right now, updated daily",
+trakt_jiohotstar_top_list_data = {
+    "name": "Top India jiohotstar Overall",
+    "description": "List that contains the top 10 overall content on jiohotstar India (in Hindi) right now, updated daily",
     "privacy": "public",
     "display_numbers": True,
 }
@@ -161,7 +161,7 @@ trakt_netflix_movies_list_slug = "top-india-netflix-movies"
 trakt_netflix_shows_list_slug = "top-india-netflix-shows"
 
 trakt_zee5_list_slug = "top-india-zee5-overall"
-trakt_hotstar_list_slug = "top-india-hotstar-overall"
+trakt_jiohotstar_list_slug = "top-india-jiohotstar-overall"
 trakt_prime_movies_list_slug = "top-india-amazon-prime-video-movies"
 trakt_prime_shows_list_slug = "top-india-amazon-prime-video-shows"
 
@@ -606,15 +606,15 @@ def check_lists(config: Config) -> bool:
     if trakt_prime_shows_list_slug not in prime_slugs:
         error_create = create_list(trakt_prime_shows_list_data, config.PRIME_CLIENT_ID, config.PRIME_ACCESS_TOKEN)
 
-    # Check Hotstar and Zee5 lists
+    # Check jiohotstar and Zee5 lists
     others_lists = get_lists(config.OTHERS_CLIENT_ID, config.OTHERS_ACCESS_TOKEN)
     others_slugs = [list["ids"]["slug"] for list in others_lists]
     logging.debug(f"Others lists slugs: {others_slugs}")
 
     if trakt_zee5_list_slug not in others_slugs:
         error_create = create_list(trakt_zee5_top_list_data, config.OTHERS_CLIENT_ID, config.OTHERS_ACCESS_TOKEN)
-    if trakt_hotstar_list_slug not in others_slugs:
-        error_create = create_list(trakt_hotstar_top_list_data, config.OTHERS_CLIENT_ID, config.OTHERS_ACCESS_TOKEN)
+    if trakt_jiohotstar_list_slug not in others_slugs:
+        error_create = create_list(trakt_jiohotstar_top_list_data, config.OTHERS_CLIENT_ID, config.OTHERS_ACCESS_TOKEN)
     # if trakt_prime_shows_list_slug not in lists_slugs:
     #     error_create = create_list(trakt_prime_shows_list_data)
     logging.debug("Lists checked!")
@@ -869,7 +869,7 @@ class StreamingServiceTracker:
             ("netflix_movies", self.config.urls["netflix"], self.config.sections["movies"]),
             ("netflix_shows", self.config.urls["netflix"], self.config.sections["shows"]),
             ("zee5_overall", self.config.urls["zee5"], self.config.sections["overall"]),
-            ("hotstar_overall", self.config.urls["hotstar"], self.config.sections["overall_hotstar"]),
+            ("jiohotstar_overall", self.config.urls["jiohotstar"], self.config.sections["overall_jiohotstar"]),
             ("prime_movies", self.config.urls["prime"], self.config.sections["movies"]),
             ("prime_shows", self.config.urls["prime"], self.config.sections["shows"]),
         ]
@@ -896,7 +896,7 @@ class StreamingServiceTracker:
         print_top_list("TOP Netflix Movies", data["netflix_movies"])
         print_top_list("TOP Netflix Shows", data["netflix_shows"])
         print_top_list("TOP Zee5 Overall", data["zee5_overall"])
-        print_top_list("TOP Hotstar Overall", data["hotstar_overall"])
+        print_top_list("TOP jiohotstar Overall", data["jiohotstar_overall"])
         print_top_list("TOP Amazon Prime Video Movies", data["prime_movies"])
         print_top_list("TOP Amazon Prime Video Shows", data["prime_shows"])
 
@@ -946,7 +946,7 @@ class StreamingServiceTracker:
             logging.error("Failed to validate Prime Video Trakt token")
             return False
 
-        # Check Hotstar & Zee5 account
+        # Check jiohotstar & Zee5 account
         others_result = check_token(
             self.config.OTHERS_CLIENT_ID,
             self.config.OTHERS_CLIENT_SECRET,
@@ -1005,13 +1005,13 @@ class StreamingServiceTracker:
             trakt_prime_shows_list_slug, prime_shows_update, self.config.PRIME_CLIENT_ID, self.config.PRIME_ACCESS_TOKEN
         )
 
-        # Update Hotstar and Zee5 lists using Others account
-        logging.info("Updating Hotstar and Zee5 lists...")
+        # Update jiohotstar and Zee5 lists using Others account
+        logging.info("Updating jiohotstar and Zee5 lists...")
         zee5_update = create_mixed_trakt_list_payload(data["zee5_overall"])
-        hotstar_update = create_mixed_trakt_list_payload(data["hotstar_overall"])
+        jiohotstar_update = create_mixed_trakt_list_payload(data["jiohotstar_overall"])
         update_list(trakt_zee5_list_slug, zee5_update, self.config.OTHERS_CLIENT_ID, self.config.OTHERS_ACCESS_TOKEN)
         update_list(
-            trakt_hotstar_list_slug, hotstar_update, self.config.OTHERS_CLIENT_ID, self.config.OTHERS_ACCESS_TOKEN
+            trakt_jiohotstar_list_slug, jiohotstar_update, self.config.OTHERS_CLIENT_ID, self.config.OTHERS_ACCESS_TOKEN
         )
 
     def _report_execution_summary(self, data: Dict[str, Any]) -> None:

@@ -9,7 +9,7 @@ A comprehensive Python automation tool that tracks the most popular content acro
 
 Stay connected with India's streaming trends! This automation tool:
 
-- 📊 **Tracks Multiple Platforms**: Netflix, Hotstar, Zee5, and Amazon Prime Video
+- 📊 **Tracks Multiple Platforms**: Netflix, jiohotstar, Zee5, and Amazon Prime Video
 - 🔄 **Auto-Sync to Trakt**: Creates and maintains public Trakt lists with trending content
 - ⏰ **Real-Time Updates**: Runs 4 times daily via GitHub Actions (00:00, 08:00, 12:00, 17:00 UTC)
 - 🎬 **Comprehensive Coverage**: Movies, TV shows
@@ -27,7 +27,7 @@ Stay connected with India's streaming trends! This automation tool:
 
 ### Supported Streaming Services
 - 🔴 **Netflix**: Movies, TV Shows
-- 🔵 **Hotstar**: Overall top content (mixed movies and shows)
+- 🔵 **jiohotstar**: Overall top content (mixed movies and shows)
 - 🍎 **Zee5**: Overall top content (mixed movies and shows)
 - 📦 **Amazon Prime Video**: Movies, TV Shows
 
@@ -35,7 +35,7 @@ Stay connected with India's streaming trends! This automation tool:
 All lists are public and automatically updated with current rankings:
 - Top India Netflix Movies
 - Top India Netflix Shows  
-- Top India Hotstar (mixed content)
+- Top India jiohotstar (mixed content)
 - Top India Zee5 (mixed content)
 - Top India Amazon Prime Movies
 - Top India Amazon Prime Shows
@@ -293,7 +293,7 @@ We welcome contributions! Here's how you can help:
 The script scrapes data from these FlixPatrol URLs:
 
 - **Netflix**: `https://flixpatrol.com/top10/netflix/India/`
-- **Hotstar**: `https://flixpatrol.com/top10/hotstar/India/`
+- **jiohotstar**: `https://flixpatrol.com/top10/jiohotstar/India/`
 - **Zee5**: `https://flixpatrol.com/top10/zee5/India/`
 - **Prime Video**: `https://flixpatrol.com/top10/amazon-prime-video/India/`
 

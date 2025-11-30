@@ -178,7 +178,7 @@ jobs:
           PRIME_ACCESS_TOKEN: ${{ steps.refresh-prime.outputs.prime_access_token }}
           PRIME_REFRESH_TOKEN: ${{ steps.refresh-prime.outputs.prime_refresh_token }}
 
-          # Others Account (Hotstar & Zee5)
+          # Others Account (jiohotstar & Zee5)
           OTHERS_CLIENT_ID: ${{ secrets.OTHERS_CLIENT_ID }}
           OTHERS_CLIENT_SECRET: ${{ secrets.OTHERS_CLIENT_SECRET }}
           OTHERS_ACCESS_TOKEN: ${{ steps.refresh-others.outputs.others_access_token }}
